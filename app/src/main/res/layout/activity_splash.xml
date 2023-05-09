@@ -13,11 +13,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/foreground" />
     
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/subtitle"
-        android:text="Loading..."
+
 
     <ProgressBar
         android:id="@+id/progress_bar"
