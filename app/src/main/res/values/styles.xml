@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="subtitle">
-        <item name="android:textSize">36sp</item>
-        <item name="android:letterSpacing">0</item>
+    <style name="baseTextStyle">
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="fontFamily"></item>
+        <item name="fontFamily">@font/sansita_one_font</item>
+    </style>
+
+    <style name="progressBarStyle" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:indeterminateDrawable">@drawable/progress_bar</item>
+        <item name="android:maxHeight">48dp</item>
+
     </style>
 </resources>

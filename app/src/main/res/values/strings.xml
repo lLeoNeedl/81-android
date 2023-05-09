@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Nile Fortune</string>
+    <string name="tv_loading">Loading...</string>
 </resources>
