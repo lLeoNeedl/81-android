@@ -5,4 +5,14 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="fontFamily">@font/sansita_one_font</item>
     </style>
+
+    <style name="secondaryTextStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/sansita_one_font</item>
+    </style>
+
+    <style name="radioButtonStyle">
+        <item name="android:checked">true</item>
+    </style>
 </resources>
