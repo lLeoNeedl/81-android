@@ -6,4 +6,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="header_sign_up">Sign Up to save your results</string>
     <string name="radio_btn_phone">phone</string>
+    <string name="btn_continue">Continue</string>
+    <string name="rb_anonymous">anonymous</string>
+    <string name="rb_phone">phone</string>
+    <string name="header_enter_phone">Enter phone to save your results</string>
 </resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="340dp"
+    android:layout_height="340dp"
+    android:background="@drawable/authorization_window"
+    android:orientation="vertical"
+    android:paddingHorizontal="36dp"
+    tools:context=".EnterPhoneNumberFragment">
+
+    <TextView
+        style="@style/baseTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/header_enter_phone"
+        android:textAlignment="center" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="24dp"
+        app:boxBackgroundColor="@color/text_input_layout_bg_color"
+        app:boxCornerRadiusBottomEnd="@dimen/et_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/et_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/et_corner_radius"
+        app:boxCornerRadiusTopStart="@dimen/et_corner_radius"
+        app:boxStrokeColor="@color/text_input_layout_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:inputType="phone"
+            style="@style/secondaryTextStyle"
+            android:textCursorDrawable="@null"
+            android:layout_height="76dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            style="@style/secondaryTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/btn_continue"
+            android:textColor="#000000" />
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
+class EnterPhoneNumberFragment : Fragment() {
 
-class FragmentAuthorization : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +19,7 @@ class FragmentAuthorization : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_authorization, container, false)
+        return inflater.inflate(R.layout.fragment_enter_phone_number, container, false)
     }
+
 }

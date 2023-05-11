@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:name="com.nile.fortu.game.FragmentAuthorization"
-        tools:layout="@layout/fragment_authorization" />
+        android:name="com.nile.fortu.game.EnterPhoneNumberFragment"
+        tools:layout="@layout/fragment_enter_phone_number" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
