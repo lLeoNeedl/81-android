@@ -12,17 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App.NoActionBar"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".FirstGameActivity"
+            android:exported="false" />
         <activity
             android:name=".GoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".StopActivity"
-            android:windowSoftInputMode="adjustResize"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>

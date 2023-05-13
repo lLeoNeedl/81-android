@@ -10,4 +10,8 @@
     <string name="rb_anonymous">anonymous</string>
     <string name="rb_phone">phone</string>
     <string name="header_enter_phone">Enter phone to save your results</string>
+    <string name="btn_spin">Spin</string>
+    <string name="content_description_logo">Logo</string>
+    <string name="box_header_balance">Balance</string>
+    <string name="box_header_win">Win</string>
 </resources>
