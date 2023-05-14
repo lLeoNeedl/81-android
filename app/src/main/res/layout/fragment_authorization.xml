@@ -79,7 +79,7 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="56dp"
-        android:background="@drawable/button"
+        android:background="@drawable/base_btn_ripple"
         android:clickable="true"
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="42dp"

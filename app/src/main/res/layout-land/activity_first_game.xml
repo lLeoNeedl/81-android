@@ -7,13 +7,13 @@
     android:background="@drawable/first_game_horizontal_bg"
     tools:context=".FirstGameActivity">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageView3"
         android:layout_width="68dp"
         android:layout_height="56dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
-        android:src="@drawable/button_back"
+        android:background="@drawable/btn_back_ripple"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -110,11 +110,11 @@
             app:layout_constraintBottom_toTopOf="@+id/fl_spin"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <ImageView
+            <ImageButton
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/btn_decrease" />
+                android:background="@drawable/btn_decrease_ripple" />
 
             <FrameLayout
                 android:layout_width="148dp"
@@ -135,11 +135,11 @@
 
             </FrameLayout>
 
-            <ImageView
+            <ImageButton
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/btn_increase" />
+                android:background="@drawable/btn_increase_ripple" />
         </LinearLayout>
 
 
@@ -147,7 +147,9 @@
             android:id="@+id/fl_spin"
             android:layout_width="148dp"
             android:layout_height="56dp"
-            android:background="@drawable/button_game"
+            android:background="@drawable/btn_spin_ripple"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 

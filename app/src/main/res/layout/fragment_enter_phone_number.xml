@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/button"
+        android:background="@drawable/base_btn_ripple"
         android:clickable="true"
         android:focusable="true">
 
