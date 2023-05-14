@@ -14,17 +14,6 @@ class MenuFragment : Fragment() {
     private val binding: FragmentMenuBinding
         get() = _binding ?: throw RuntimeException("FragmentMenuBinding == null")
 
-    lateinit var onFragmentAttached: OnFragmentAttached
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentAttached) {
-            onFragmentAttached = context
-        } else {
-            throw RuntimeException("Activity must implement OnFragmentAttached")
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,8 +32,6 @@ class MenuFragment : Fragment() {
                 .addToBackStack("choose_game")
                 .replace(R.id.menu_activity_fragment_container, fragment, "choose_game")
                 .commit()
-
-            onFragmentAttached.updateScreen(MenuActivity.CHOOSE_GAME_FRAGMENT_TAG)
         }
 
         binding.flSettings.setOnClickListener {
@@ -54,18 +41,10 @@ class MenuFragment : Fragment() {
                 .addToBackStack("settings")
                 .replace(R.id.menu_activity_fragment_container, fragment, "settings")
                 .commit()
-
-            onFragmentAttached.updateScreen(MenuActivity.SETTINGS_FRAGMENT_TAG)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        onFragmentAttached.restoreViews()
     }
-}
-
-interface OnFragmentAttached {
-    fun updateScreen(fragmentTag: String)
-    fun restoreViews()
 }
