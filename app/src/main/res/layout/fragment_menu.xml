@@ -1,69 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingHorizontal="36dp"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context=".MenuFragment">
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/foreground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <FrameLayout
-        android:id="@+id/fl_games"
+        android:id="@+id/btn_return"
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/base_btn_ripple"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_ripple_effect"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            style="@style/secondaryTextStyle"
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/btn_games"
-            android:textColor="@color/black" />
-
+            android:background="@drawable/menu_btn_back"
+            android:contentDescription="@string/menu_btn_return_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/fl_settings"
+        android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/base_btn_ripple"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/base_ripple_effect"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            style="@style/secondaryTextStyle"
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/btn_settings"
-            android:textColor="@color/black" />
-
+            android:background="@drawable/menu_btn_logout"
+            android:contentDescription="@string/menu_btn_logout_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/fl_privacy"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:background="@drawable/base_btn_ripple"
-        android:clickable="true"
-        android:focusable="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            style="@style/secondaryTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/btn_privacy"
-            android:textColor="@color/black" />
+        <FrameLayout
+            android:id="@+id/fl_games"
+            android:layout_width="268dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/base_btn_ripple"
+            android:clickable="true"
+            android:focusable="true">
 
-    </FrameLayout>
+            <TextView
+                style="@style/secondaryTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/btn_games"
+                android:textColor="@color/black" />
 
+        </FrameLayout>
 
-</LinearLayout>
+        <FrameLayout
+            android:id="@+id/fl_settings"
+            android:layout_width="268dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="72dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/base_btn_ripple"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                style="@style/secondaryTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/btn_settings"
+                android:textColor="@color/black" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_privacy"
+            android:layout_width="268dp"
+            android:layout_height="56dp"
+            android:background="@drawable/base_btn_ripple"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                style="@style/secondaryTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/btn_privacy"
+                android:textColor="@color/black" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

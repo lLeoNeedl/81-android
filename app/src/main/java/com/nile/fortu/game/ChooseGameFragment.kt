@@ -15,17 +15,6 @@ class ChooseGameFragment : Fragment() {
     private val binding: FragmentChooseGameBinding
         get() = _binding ?: throw RuntimeException("FragmentChooseGameBinding == null")
 
-    lateinit var onFragmentAttached: OnFragmentAttached
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentAttached) {
-            onFragmentAttached = context
-        } else {
-            throw RuntimeException("Activity must implement OnFragmentAttached")
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,9 +22,4 @@ class ChooseGameFragment : Fragment() {
         _binding = FragmentChooseGameBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-//    override fun onDetach() {
-//        super.onDetach()
-//        onFragmentAttached.restoreViews()
-//    }
 }
