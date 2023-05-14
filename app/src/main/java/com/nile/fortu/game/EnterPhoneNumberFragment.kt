@@ -32,7 +32,7 @@ class EnterPhoneNumberFragment : Fragment() {
         flContinue = view.findViewById(R.id.fl_continue)
 
         flContinue.setOnClickListener {
-            val intent = Intent(requireContext(), FirstGameActivity::class.java)
+            val intent = Intent(requireContext(), MenuActivity::class.java)
             startActivity(intent)
         }
     }

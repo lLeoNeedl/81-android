@@ -5,11 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GoActivity"
-    android:background="@drawable/background"
-    >
+    android:background="@drawable/background">
 
     <ImageView
-        android:id="@+id/imageView"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,17 +17,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/splash_screen_description" />
+        android:contentDescription="@string/app_name" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_sign_up"
+        android:id="@+id/main_activity_fragment_container"
         android:layout_width="340dp"
         android:layout_height="340dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:name="com.nile.fortu.game.EnterPhoneNumberFragment"
-        tools:layout="@layout/fragment_enter_phone_number" />
+        android:name="com.nile.fortu.game.AuthorizationFragment"
+        tools:layout="@layout/fragment_authorization" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

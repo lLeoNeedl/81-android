@@ -20,9 +20,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="36dp"
         android:layout_marginVertical="32dp"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="36dp">
+        android:orientation="horizontal">
 
         <RadioGroup
             android:id="@+id/rg_sign_up"
@@ -68,30 +68,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:layout_marginTop="6dp"
+                android:focusable="true"
                 android:gravity="center_vertical"
                 android:paddingHorizontal="16dp"
-                android:text="@string/rb_anonymous"
-                android:focusable="true" />
+                android:text="@string/rb_anonymous" />
 
         </LinearLayout>
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/fl_continue"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
+        android:layout_marginHorizontal="42dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/base_btn_ripple"
         android:clickable="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="42dp"
         android:focusable="true">
 
         <TextView
+            style="@style/secondaryTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/btn_continue"
-            android:textColor="@color/black"
-            style="@style/secondaryTextStyle"/>
+            android:textColor="@color/black" />
 
     </FrameLayout>
 
