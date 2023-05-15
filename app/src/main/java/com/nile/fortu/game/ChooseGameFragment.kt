@@ -22,4 +22,20 @@ class ChooseGameFragment : Fragment() {
         _binding = FragmentChooseGameBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.run {
+            btnGame1.setOnClickListener {
+                val intent = FirstGameActivity.newIntent(requireContext())
+                startActivity(intent)
+            }
+
+            btnGame2.setOnClickListener {
+                val intent = SecondGameActivity.newIntent(requireContext())
+                startActivity(intent)
+            }
+        }
+    }
 }
