@@ -13,7 +13,7 @@ class ChooseGameFragment : Fragment() {
 
     private var _binding: FragmentChooseGameBinding? = null
     private val binding: FragmentChooseGameBinding
-        get() = _binding ?: throw RuntimeException("FragmentChooseGameBinding == null")
+        get() = _binding ?: throw RuntimeException("ChooseGameFragment == null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +36,29 @@ class ChooseGameFragment : Fragment() {
                 val intent = SecondGameActivity.newIntent(requireContext())
                 startActivity(intent)
             }
+
+            binding.tvReturnToMenu.setOnClickListener {
+                activity?.supportFragmentManager?.popBackStack()
+            }
+
+            binding.btnBonusGame.setOnClickListener {
+                val intent = BonusGameActivity.newIntent(requireContext())
+                startActivity(intent)
+            }
+
+            binding.btnLogout.setOnClickListener {
+                val intent = GoActivity.newIntent(requireContext())
+                startActivity(intent)
+            }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    companion object {
+        fun newInstance() = ChooseGameFragment()
     }
 }

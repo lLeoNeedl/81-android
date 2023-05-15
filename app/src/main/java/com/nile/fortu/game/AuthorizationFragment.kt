@@ -13,7 +13,7 @@ class AuthorizationFragment : Fragment() {
 
     private var _binding: FragmentAuthorizationBinding? = null
     private val binding: FragmentAuthorizationBinding
-        get() = _binding ?: throw RuntimeException("FragmentAuthorizationBinding == null")
+        get() = _binding ?: throw RuntimeException("AuthorizationFragment == null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,12 +27,18 @@ class AuthorizationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.flContinue.setOnClickListener {
-            val fragment = EnterPhoneNumberFragment()
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.main_activity_fragment_container, fragment)
-                .commit()
+            if (binding.rbPhone.isChecked) {
+                val fragment = EnterPhoneNumberFragment.newInstance()
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.main_activity_fragment_container, fragment)
+                    .commit()
+            } else {
+                val intent = MenuActivity.newIntent(requireContext())
+                startActivity(intent)
+            }
+
         }
     }
 

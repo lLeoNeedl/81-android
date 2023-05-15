@@ -1,6 +1,8 @@
 package com.nile.fortu.game
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +14,18 @@ class MenuFragment : Fragment() {
 
     private var _binding: FragmentMenuBinding? = null
     private val binding: FragmentMenuBinding
-        get() = _binding ?: throw RuntimeException("FragmentMenuBinding == null")
+        get() = _binding ?: throw RuntimeException("MenuFragment == null")
+
+    private lateinit var onReturnButtonPressed: OnReturnButtonPressed
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnReturnButtonPressed) {
+            onReturnButtonPressed = context
+        } else {
+            throw RuntimeException("MenuActivity must implement OnReturnButtonPressed interface")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,11 +39,11 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.flGames.setOnClickListener {
-            val fragment = ChooseGameFragment()
+            val fragment = ChooseGameFragment.newInstance()
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .addToBackStack("choose_game")
-                .replace(R.id.menu_activity_fragment_container, fragment, "choose_game")
+                .addToBackStack(null)
+                .replace(R.id.menu_activity_fragment_container, fragment)
                 .commit()
         }
 
@@ -38,13 +51,32 @@ class MenuFragment : Fragment() {
             val fragment = SettingsFragment()
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .addToBackStack("settings")
-                .replace(R.id.menu_activity_fragment_container, fragment, "settings")
+                .addToBackStack(null)
+                .replace(R.id.menu_activity_fragment_container, fragment)
                 .commit()
+        }
+
+        binding.flPrivacy.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"))
+            startActivity(browserIntent)
+        }
+
+        binding.btnReturn.setOnClickListener {
+            onReturnButtonPressed.onReturnButtonPressed()
+        }
+
+        binding.btnLogout.setOnClickListener {
+            val intent = GoActivity.newIntent(requireContext())
+            startActivity(intent)
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    interface OnReturnButtonPressed {
+        fun onReturnButtonPressed()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
