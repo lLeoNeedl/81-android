@@ -26,7 +26,7 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnReturn.setOnClickListener {
-            activity?.supportFragmentManager?.popBackStack()
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 

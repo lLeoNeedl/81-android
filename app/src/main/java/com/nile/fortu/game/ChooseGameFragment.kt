@@ -38,7 +38,7 @@ class ChooseGameFragment : Fragment() {
             }
 
             binding.tvReturnToMenu.setOnClickListener {
-                activity?.supportFragmentManager?.popBackStack()
+                requireActivity().supportFragmentManager.popBackStack()
             }
 
             binding.btnBonusGame.setOnClickListener {
