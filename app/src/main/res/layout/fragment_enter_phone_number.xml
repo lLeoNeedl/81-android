@@ -31,6 +31,7 @@
         app:boxStrokeColor="@color/text_input_layout_stroke_color">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_phone_number"
             android:layout_width="match_parent"
             android:inputType="phone"
             style="@style/secondaryTextStyle"

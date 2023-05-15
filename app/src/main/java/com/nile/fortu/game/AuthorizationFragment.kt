@@ -26,6 +26,14 @@ class AuthorizationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.tvPhone.setOnClickListener {
+            binding.rbPhone.isChecked = true
+        }
+
+        binding.tvAnonymous.setOnClickListener {
+            binding.rbAnonymous.isChecked = true
+        }
+
         binding.flContinue.setOnClickListener {
             if (binding.rbPhone.isChecked) {
                 val fragment = EnterPhoneNumberFragment.newInstance()

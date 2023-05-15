@@ -30,6 +30,9 @@ class EnterPhoneNumberFragment : Fragment() {
 
         binding.flContinue.setOnClickListener {
             val intent = MenuActivity.newIntent(requireContext())
+            if (binding.etPhoneNumber.text?.isNotBlank() == true) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
             startActivity(intent)
         }
     }
