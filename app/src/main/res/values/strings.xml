@@ -23,4 +23,6 @@
     <string name="setting_vibration">Vibration</string>
     <string name="btn_decrease_description">Decrease</string>
     <string name="btn_increase_description">Increase</string>
+    <string name="tv_bonus_game">Bonus game</string>
+    <string name="wheel_description">Wheel</string>
 </resources>
