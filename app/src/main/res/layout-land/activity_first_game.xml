@@ -15,7 +15,8 @@
         android:layout_marginTop="18dp"
         android:background="@drawable/btn_back_ripple"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/tv_return_to_menu" />
 
     <LinearLayout
         android:id="@+id/frameLayout2"
@@ -105,6 +106,7 @@
             android:id="@+id/ll_bet_panel"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/fl_spin"
@@ -114,10 +116,11 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/btn_decrease_ripple" />
+                android:background="@drawable/btn_decrease_ripple"
+                android:contentDescription="@string/btn_decrease_description" />
 
             <FrameLayout
-                android:layout_width="148dp"
+                android:layout_width="162dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/bet_box"
                 app:layout_constraintBottom_toTopOf="@+id/fl_spin"
@@ -139,13 +142,14 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/btn_increase_ripple" />
+                android:background="@drawable/btn_increase_ripple"
+                android:contentDescription="@string/btn_increase_description" />
         </LinearLayout>
 
 
         <FrameLayout
             android:id="@+id/fl_spin"
-            android:layout_width="148dp"
+            android:layout_width="162dp"
             android:layout_height="56dp"
             android:background="@drawable/btn_spin_ripple"
             android:clickable="true"

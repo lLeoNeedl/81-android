@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/first_game_bg"
+    android:background="@drawable/second_game_horizontal_bg"
     tools:context=".FirstGameActivity">
 
     <ImageButton
@@ -12,7 +12,7 @@
         android:layout_width="68dp"
         android:layout_height="56dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/btn_back_ripple"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,21 +22,20 @@
         android:id="@+id/frameLayout2"
         android:layout_width="116dp"
         android:layout_height="56dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginStart="16dp"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/statistics_box"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/frameLayout"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             style="@style/boxHeaderStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/box_header_balance"
             android:layout_gravity="center"
+            android:text="@string/box_header_balance"
             android:textAlignment="center"
             android:textColor="@color/black" />
 
@@ -55,11 +54,11 @@
         android:id="@+id/frameLayout"
         android:layout_width="116dp"
         android:layout_height="56dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="36dp"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="42dp"
         android:background="@drawable/statistics_box"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -67,8 +66,8 @@
             style="@style/boxHeaderStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/box_header_win"
             android:layout_gravity="center"
+            android:text="@string/box_header_win"
             android:textAlignment="center"
             android:textColor="@color/black" />
 
@@ -86,11 +85,12 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/iv_logo"
@@ -98,10 +98,9 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:contentDescription="@string/content_description_logo"
-            android:src="@drawable/game1_logo"
+            android:src="@drawable/game2_logo"
             app:layout_constraintBottom_toTopOf="@+id/ll_bet_panel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <LinearLayout
             android:id="@+id/ll_bet_panel"
@@ -111,8 +110,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/fl_spin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <ImageButton
                 android:layout_width="42dp"
@@ -122,9 +120,8 @@
                 android:contentDescription="@string/btn_decrease_description" />
 
             <FrameLayout
-                android:id="@+id/fl_bet_box"
-                android:layout_width="148dp"
-                android:layout_height="56dp"
+                android:layout_width="162dp"
+                android:layout_height="match_parent"
                 android:background="@drawable/bet_box"
                 app:layout_constraintBottom_toTopOf="@+id/fl_spin"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -152,15 +149,13 @@
 
         <FrameLayout
             android:id="@+id/fl_spin"
-            android:layout_width="148dp"
+            android:layout_width="162dp"
             android:layout_height="56dp"
-            android:layout_marginBottom="28dp"
             android:background="@drawable/btn_spin_ripple"
             android:clickable="true"
             android:focusable="true"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
                 style="@style/secondaryTextStyle"
@@ -179,11 +174,11 @@
         android:id="@+id/linearLayout"
         android:layout_width="340dp"
         android:layout_height="254dp"
-        android:layout_marginBottom="56dp"
-        android:background="@drawable/game_space"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/game2_space"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
