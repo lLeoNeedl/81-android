@@ -141,6 +141,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
+                    android:id="@+id/score"
                     style="@style/secondaryTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -185,7 +186,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/linearLayout"
         android:layout_width="340dp"
         android:layout_height="254dp"
@@ -194,6 +195,55 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:id="@+id/imagesLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent"
+            android:layout_gravity="center_horizontal|center_vertical"
+            >
+
+            <com.nile.fortu.game.slotImagesScroll.SlotScroll
+                android:id="@+id/image1"
+                android:padding="10sp"
+                android:layout_width="100dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center_vertical"
+                />
+
+            <com.nile.fortu.game.slotImagesScroll.SlotScroll
+                android:id="@+id/image2"
+                android:padding="10sp"
+                android:layout_width="100dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center_vertical" />
+
+            <com.nile.fortu.game.slotImagesScroll.SlotScroll
+                android:id="@+id/image3"
+                android:padding="10sp"
+                android:layout_width="100dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center_vertical" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/leverUp"
+            android:layout_marginTop="50sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image"/>
+
+        <ImageView
+            android:id="@+id/leverDown"
+            android:layout_marginTop="120sp"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
