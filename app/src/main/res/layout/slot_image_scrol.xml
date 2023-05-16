@@ -6,7 +6,6 @@
 
     <ImageView
         android:id="@+id/currentImage"
-        android:src="@drawable/j_image"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
@@ -14,7 +13,6 @@
 
     <ImageView
         android:id="@+id/nextImage"
-        android:src="@drawable/j_image"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
         android:layout_height="wrap_content"

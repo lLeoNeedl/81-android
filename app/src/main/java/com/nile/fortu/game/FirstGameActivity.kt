@@ -4,14 +4,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import com.nile.fortu.game.databinding.ActivityBonusGameBinding
-import com.nile.fortu.game.databinding.ActivityFirstGameBinding
 import com.nile.fortu.game.slotImagesScroll.EventEnd
 import com.nile.fortu.game.slotImagesScroll.SlotScroll
 import com.nile.fortu.game.slotImagesScroll.Utils
@@ -22,8 +18,8 @@ class FirstGameActivity : AppCompatActivity(), EventEnd {
     private var countDown = 0
 
     private lateinit var image1: SlotScroll
-    private lateinit var image2:  SlotScroll
-    private lateinit var image3:  SlotScroll
+    private lateinit var image2: SlotScroll
+    private lateinit var image3: SlotScroll
     private lateinit var flSpin: FrameLayout
     private lateinit var btnReturn: ImageButton
     private lateinit var leverDown: ImageView
@@ -35,14 +31,14 @@ class FirstGameActivity : AppCompatActivity(), EventEnd {
 
         initViews()
 
-        image1.setEventEnd(this@FirstGameActivity)
-        image2.setEventEnd(this@FirstGameActivity)
-        image3.setEventEnd(this@FirstGameActivity)
+        image1.eventEnd = this
+        image2.eventEnd = this
+        image3.eventEnd = this
 
         flSpin.setOnClickListener {
             if (Utils.score >= 50) {
-                leverUp.visibility = View.GONE
-                leverDown.visibility = View.VISIBLE
+//                leverUp.visibility = View.GONE
+//                leverDown.visibility = View.VISIBLE
                 image1.setRandomValue(Random.nextInt(6), Random.nextInt(15 - 5 + 1) + 5)
                 image2.setRandomValue(Random.nextInt(6), Random.nextInt(15 - 5 + 1) + 5)
                 image3.setRandomValue(Random.nextInt(6), Random.nextInt(15 - 5 + 1) + 5)
@@ -64,8 +60,7 @@ class FirstGameActivity : AppCompatActivity(), EventEnd {
     }
 
 
-
-    private fun initViews (){
+    private fun initViews() {
         image1 = findViewById(R.id.image1)
         image2 = findViewById(R.id.image2)
         image3 = findViewById(R.id.image3)
@@ -76,27 +71,24 @@ class FirstGameActivity : AppCompatActivity(), EventEnd {
     }
 
     override fun eventEnd(result: Int, count: Int) {
-        if(countDown < 2){
+        if (countDown < 2) {
             countDown++
-        }
-        else{
-            leverDown.visibility = View.GONE
-            leverUp.visibility = View.VISIBLE
+        } else {
+//            leverDown.visibility = View.GONE
+//            leverUp.visibility = View.VISIBLE
             countDown = 0
 
-            if(image1.value == image2.value && image2.value == image3.value){
-                Toast.makeText(this,"YOU WON!!!!", Toast.LENGTH_SHORT).show()
-                Utils.score +=300
+            if (image1.value == image2.value && image2.value == image3.value) {
+                Toast.makeText(this, "YOU WON!!!", Toast.LENGTH_SHORT).show()
+                Utils.score += 300
 //                score_tv.text = Utils.score.toString()
-           }
-            else if(image1.value == image2.value || image2.value == image3.value || image1.value == image3.value){
-                Toast.makeText(this,"You did good.", Toast.LENGTH_SHORT).show()
-                Utils.score +=100
+            } else if (image1.value == image2.value || image2.value == image3.value || image1.value == image3.value) {
+                Toast.makeText(this, "You did good.", Toast.LENGTH_SHORT).show()
+                Utils.score += 100
 //                score_tv.text = Utils.score.toString()
-            }
-            else{
-                Toast.makeText(this,"You lost. Better luck next time.", Toast.LENGTH_SHORT).show()
-                Utils.score +=0
+            } else {
+                Toast.makeText(this, "You lost. Better luck next time.", Toast.LENGTH_SHORT).show()
+                Utils.score += 0
 //                score_tv.text = Utils.score.toString()
             }
         }
