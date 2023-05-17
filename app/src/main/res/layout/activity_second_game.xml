@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/fl_slots"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -168,7 +168,7 @@
             android:background="@drawable/btn_spin_ripple"
             android:clickable="true"
             android:focusable="true"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintBottom_toTopOf="@+id/fl_slots"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -186,7 +186,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/fl_slots"
         android:layout_width="340dp"
         android:layout_height="254dp"
         android:layout_marginBottom="56dp"

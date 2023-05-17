@@ -42,9 +42,9 @@ class SlotScroll(context: Context, attrs: AttributeSet) : FrameLayout(context, a
         nextImage.animate()
             .translationY(0f).setDuration(ANIMATION_DURATION)
             .setListener(object : Animator.AnimatorListener {
-                override fun onAnimationRepeat(animation: Animator) {
 
-                }
+                override fun onAnimationRepeat(animation: Animator) {}
+
                 override fun onAnimationEnd(animation: Animator) {
                     currentImage.visibility = View.GONE
                     setImage(currentImage, oldValue%6)
@@ -58,14 +58,16 @@ class SlotScroll(context: Context, attrs: AttributeSet) : FrameLayout(context, a
                         oldValue = 0
                         setImage(nextImage, image)
                         eventEnd.eventEnd(image%6, numRoll)
+                        eventEnd.changeButtonState(true)
+                        eventEnd.unlockOrientationChange()
                     }
                 }
 
-                override fun onAnimationCancel(animation: Animator) {
-
-                }
+                override fun onAnimationCancel(animation: Animator) {}
 
                 override fun onAnimationStart(animation: Animator) {
+                    eventEnd.changeButtonState(false)
+                    eventEnd.lockOrientationChange()
                 }
 
             }).start()

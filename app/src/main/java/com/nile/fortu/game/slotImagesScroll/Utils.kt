@@ -9,6 +9,6 @@ object Utils {
     var runeImage = 4
     var wildImage = 5
 
-    var score = 1000 //initializing the score with a value
+    var balance = 1000
 
 }
