@@ -181,7 +181,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/fl_slots"
         android:layout_width="340dp"
         android:layout_height="254dp"
         android:layout_marginStart="52dp"
