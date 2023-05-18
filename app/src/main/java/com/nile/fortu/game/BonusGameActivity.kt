@@ -18,7 +18,8 @@ class BonusGameActivity : AppCompatActivity() {
         ActivityBonusGameBinding.inflate(layoutInflater)
     }
 
-    private val sector = arrayOf("Jackpot", "10", "200", "500", "100", "50", "1000")
+    private val sector = arrayOf("1000", "500", "200", "1000", "50", "100", "500","200"
+    , "10", "200", "Jackpot", "100")
     private val sectorDegrees = arrayOfNulls<Int>(sector.size)
     private val random = Random()
     private var degree = 0
@@ -61,7 +62,7 @@ class BonusGameActivity : AppCompatActivity() {
 
             override fun onAnimationEnd(animation: Animation?) {
                 Toast.makeText(this@BonusGameActivity, "You have got "+
-                sector[sector.size-(degree+1)] + "point", Toast.LENGTH_SHORT).show()
+                sector[sector.size-(degree+1)] + " point", Toast.LENGTH_SHORT).show()
                 isSpinning = false
             }
 
@@ -73,6 +74,11 @@ class BonusGameActivity : AppCompatActivity() {
 
         binding.imageCircle.startAnimation(rotateAnimation)
     }
+
+    private fun saveEarnings(earned:Int){
+
+    }
+
     private fun getDegreeFromSectors() {
 
         val sectorDegree = 360 / sector.size
