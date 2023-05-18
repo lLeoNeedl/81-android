@@ -50,6 +50,7 @@
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/tv_balance"
             style="@style/secondaryTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,6 +83,7 @@
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/tv_score"
             style="@style/secondaryTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,6 +125,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageButton
+                android:id="@+id/btn_decrease"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="10dp"
@@ -138,6 +141,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
+                    android:id="@+id/tv_bet"
                     style="@style/secondaryTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -149,6 +153,7 @@
             </FrameLayout>
 
             <ImageButton
+                android:id="@+id/btn_increase"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="10dp"
@@ -180,15 +185,49 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/fl_slots"
         android:layout_width="340dp"
         android:layout_height="254dp"
         android:layout_marginStart="52dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/game_space"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:id="@+id/ll_slots"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent"
+            android:layout_gravity="center_horizontal|center_vertical"
+            >
+
+            <com.nile.fortu.game.slotImagesScroll.SlotScroll
+                android:id="@+id/slot1"
+                android:padding="10sp"
+                android:layout_width="100dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center_vertical"
+                />
+
+            <com.nile.fortu.game.slotImagesScroll.SlotScroll
+                android:id="@+id/slot2"
+                android:padding="10sp"
+                android:layout_width="100dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center_vertical" />
+
+            <com.nile.fortu.game.slotImagesScroll.SlotScroll
+                android:id="@+id/slot3"
+                android:padding="10sp"
+                android:layout_width="100dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center_vertical" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
