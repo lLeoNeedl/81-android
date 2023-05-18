@@ -74,6 +74,7 @@
                 android:textColor="@color/black" />
 
             <TextView
+                android:id="@+id/bonusBalance"
                 style="@style/secondaryTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,6 +108,7 @@
                 android:textColor="@color/black" />
 
             <TextView
+                android:id="@+id/bonusScore"
                 style="@style/secondaryTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

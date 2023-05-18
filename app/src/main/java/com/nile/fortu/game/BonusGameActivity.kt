@@ -18,13 +18,13 @@ class BonusGameActivity : AppCompatActivity() {
         ActivityBonusGameBinding.inflate(layoutInflater)
     }
 
-    private val sector = arrayOf("1000", "500", "200", "1000", "50", "100", "500","200"
-    , "10", "200", "Jackpot", "100")
+    private val sector = arrayOf(
+        "1000", "500", "200", "1000", "50", "100", "500", "200", "10", "200", "Jackpot", "100"
+    )
     private val sectorDegrees = arrayOfNulls<Int>(sector.size)
     private val random = Random()
     private var degree = 0
     private var isSpinning = false
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,11 +33,13 @@ class BonusGameActivity : AppCompatActivity() {
 
         getDegreeFromSectors()
 
-        binding.flSpin.setOnClickListener{
-        if (!isSpinning){
-            spin()
-            isSpinning = true
-        }
+        binding.bonusBalance.text = Util.balance.toString()
+
+        binding.flSpin.setOnClickListener {
+            if (!isSpinning) {
+                spin()
+                isSpinning = true
+            }
         }
 
         binding.btnReturn.setOnClickListener {
@@ -45,25 +47,35 @@ class BonusGameActivity : AppCompatActivity() {
         }
     }
 
-    private fun spin(){
-      degree = random.nextInt(sector.size-1)
+    private fun spin() {
+        degree = random.nextInt(sector.size - 1)
 
         val rotateAnimation = RotateAnimation(
-            0F, ((360*sector.size)+sectorDegrees[degree]!!).toFloat(),
-        RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f)
+            0F, ((360 * sector.size) + sectorDegrees[degree]!!).toFloat(),
+            RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f
+        )
 
-        rotateAnimation.duration= 3600
+        rotateAnimation.duration = 3600
         rotateAnimation.fillAfter = true
         rotateAnimation.interpolator = DecelerateInterpolator()
-        rotateAnimation.setAnimationListener(object: Animation.AnimationListener{
+        rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation?) {
 
             }
 
             override fun onAnimationEnd(animation: Animation?) {
-                Toast.makeText(this@BonusGameActivity, "You have got "+
-                sector[sector.size-(degree+1)] + " point", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@BonusGameActivity, "You have got " +
+                            sector[sector.size - (degree + 1)] + " point", Toast.LENGTH_SHORT
+                ).show()
                 isSpinning = false
+
+                if (sector[sector.size - (degree + 1)]=="Jackpot"){
+                    saveEarnings(2000)
+                }else{
+                    saveEarnings(sector[sector.size - (degree + 1)].toInt())
+                }
+
             }
 
             override fun onAnimationRepeat(animation: Animation?) {
@@ -75,14 +87,16 @@ class BonusGameActivity : AppCompatActivity() {
         binding.imageCircle.startAnimation(rotateAnimation)
     }
 
-    private fun saveEarnings(earned:Int){
-
+    private fun saveEarnings(earned: Int) {
+         Util.balance = Util.balance + earned
+        binding.bonusBalance.text = Util.balance.toString()
+        binding.bonusScore.text = earned.toString()
     }
 
     private fun getDegreeFromSectors() {
 
         val sectorDegree = 360 / sector.size
-        for (i in 0..sector.size-1) {
+        for (i in 0..sector.size - 1) {
             sectorDegrees[i] = (i + 1) * sectorDegree
         }
 
