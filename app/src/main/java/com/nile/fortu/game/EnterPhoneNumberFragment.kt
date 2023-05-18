@@ -2,14 +2,14 @@ package com.nile.fortu.game
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import com.nile.fortu.game.databinding.FragmentAuthorizationBinding
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.hbb20.CountryCodePicker.PhoneNumberValidityChangeListener
 import com.nile.fortu.game.databinding.FragmentEnterPhoneNumberBinding
+
 
 class EnterPhoneNumberFragment : Fragment() {
 
@@ -28,14 +28,23 @@ class EnterPhoneNumberFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.ccp.registerCarrierNumberEditText(binding.etPhoneNumber)
+
+
         binding.flContinue.setOnClickListener {
             val intent = MenuActivity.newIntent(requireContext())
-            if (binding.etPhoneNumber.text?.isNotBlank() == true) {
+            if (binding.etPhoneNumber.text?.isNotBlank() == true && binding.ccp.isValidFullNumber) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
+            }else{
+                Toast.makeText(requireContext(), "Invalid phone number", Toast.LENGTH_SHORT).show()
             }
-            startActivity(intent)
         }
+
+
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

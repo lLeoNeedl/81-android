@@ -18,27 +18,43 @@
         android:text="@string/header_enter_phone"
         android:textAlignment="center" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="24dp"
-        app:boxBackgroundColor="@color/text_input_layout_bg_color"
-        app:boxCornerRadiusBottomEnd="@dimen/et_corner_radius"
-        app:boxCornerRadiusBottomStart="@dimen/et_corner_radius"
-        app:boxCornerRadiusTopEnd="@dimen/et_corner_radius"
-        app:boxCornerRadiusTopStart="@dimen/et_corner_radius"
-        app:boxStrokeColor="@color/text_input_layout_stroke_color">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_phone_number"
+        <LinearLayout
+            android:id="@+id/llNumber"
             android:layout_width="match_parent"
-            android:inputType="phone"
-            style="@style/secondaryTextStyle"
-            android:textCursorDrawable="@null"
-            android:layout_height="76dp" />
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rectangle_527">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.hbb20.CountryCodePicker
+                android:layout_gravity="center"
+                android:id="@+id/ccp"
+                app:ccp_contentColor="@color/white"
+                app:ccp_defaultPhoneCode="380"
+                app:ccp_showFullName="false"
+                app:ccp_showPhoneCode="true"
+                app:ccp_showNameCode="false"
+                app:ccp_showFlag="true"
+                app:ccp_autoFormatNumber="true"
+                app:ccp_showArrow="true"
+                app:ccp_textSize="16sp"
+                app:ccp_arrowSize="16sp"
+                app:ccpDialog_keyboardAutoPopup="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_gravity="center"
+                android:inputType="phone"
+                android:background="@null"
+                style="@style/secondaryTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textCursorDrawable="@null"
+                />
+
+        </LinearLayout>
 
     <FrameLayout
         android:id="@+id/fl_continue"
