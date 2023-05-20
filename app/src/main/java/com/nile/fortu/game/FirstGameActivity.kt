@@ -6,9 +6,13 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.nile.fortu.game.databinding.ActivityFirstGameBinding
 import com.nile.fortu.game.slotImagesScroll.SlotItem
 import com.nile.fortu.game.slotImagesScroll.Utils
@@ -20,9 +24,13 @@ class FirstGameActivity : AppCompatActivity() {
     private var currentBet = 0
     private var score = 0
 
-    val slot1= SlotItem()
-    val slot2 = SlotItem()
-    val slot3 = SlotItem()
+    private lateinit var slots: List<SlotItem>
+
+    private var isFirstLaunch = true
+
+    private val viewModel by lazy {
+        ViewModelProvider(this)[FirstGameViewModel::class.java]
+    }
 
     private val binding by lazy {
         ActivityFirstGameBinding.inflate(layoutInflater)
@@ -32,46 +40,42 @@ class FirstGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        isFirstLaunch = savedInstanceState?.getBoolean(FIRST_LAUNCH_KEY) ?: true
+
+        if (isFirstLaunch) {
+            viewModel.createItemFromView(binding.flSlot1)
+            viewModel.createItemFromView(binding.flSlot2)
+            viewModel.createItemFromView(binding.flSlot3)
+        }
 
         binding.tvBet.text = currentBet.toString()
         binding.tvBalance.text = Utils.balance.toString()
         binding.tvScore.text = score.toString()
 
-        binding.run {
-            sl1NextImage.translationY = binding.flSlot1.height.toFloat()
-            sl1CurrentImage.setImageResource(R.drawable.j_image)
-            sl2NextImage.translationY = binding.flSlot2.height.toFloat()
-            sl2CurrentImage.setImageResource(R.drawable.j_image)
-            sl3NextImage.translationY = binding.flSlot3.height.toFloat()
-            sl3CurrentImage.setImageResource(R.drawable.j_image)
+        viewModel.slotList.observe(this) {
+            slots = it
+            binding.run {
+                sl1CurrentImage.setImageResource(it[0].currentImageId)
+                sl1NextImage.setImageResource(it[0].currentImageId)
+                sl1NextImage.translationY = it[0].nextImageTranslationY
+                sl2CurrentImage.setImageResource(it[1].currentImageId)
+                sl2NextImage.setImageResource(it[1].currentImageId)
+                sl2NextImage.translationY = it[1].nextImageTranslationY
+                sl3CurrentImage.setImageResource(it[2].currentImageId)
+                sl3NextImage.setImageResource(it[2].currentImageId)
+                sl3NextImage.translationY = it[2].nextImageTranslationY
+            }
         }
 
         binding.flSpin.setOnClickListener {
             if (currentBet <= Utils.balance) {
-                setRandomValue(
-                    binding.sl1CurrentImage,
-                    binding.sl1NextImage,
-                    binding.flSlot1.height,
-                    Random.nextInt(6),
-                    Random.nextInt(15 - 5 + 1) + 5,
-                    slot1
-                )
-                setRandomValue(
-                    binding.sl2CurrentImage,
-                    binding.sl2NextImage,
-                    binding.flSlot2.height,
-                    Random.nextInt(6),
-                    Random.nextInt(15 - 5 + 1) + 5,
-                    slot2
-                )
-                setRandomValue(
-                    binding.sl3CurrentImage,
-                    binding.sl3NextImage,
-                    binding.flSlot3.height,
-                    Random.nextInt(6),
-                    Random.nextInt(15 - 5 + 1) + 5,
-                    slot3
-                )
+                slots.forEach {
+                    setRandomValue(
+                        it,
+                        Random.nextInt(6),
+                        Random.nextInt(15 - 5 + 1) + 5
+                    )
+                }
             } else {
                 Toast.makeText(this, "You don't have enough money", Toast.LENGTH_SHORT).show()
             }
@@ -92,6 +96,11 @@ class FirstGameActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState.putBoolean(FIRST_LAUNCH_KEY, false)
+    }
+
     private fun increaseBet() {
         currentBet += 100
         binding.tvBet.text = currentBet.toString()
@@ -107,13 +116,12 @@ class FirstGameActivity : AppCompatActivity() {
             countDown++
         } else {
             countDown = 0
-
-            if ((binding.sl1NextImage.tag as Int) == (binding.sl2NextImage.tag as Int) && (binding.sl2NextImage.tag as Int) == (binding.sl3NextImage.tag as Int)) {
+            if (slots[0].currentImageId == slots[1].currentImageId && slots[1].currentImageId == slots[2].currentImageId) {
                 Toast.makeText(this, "YOU WON!!!", Toast.LENGTH_SHORT).show()
                 score = currentBet * 2
                 Utils.balance += score
                 binding.tvBalance.text = Utils.balance.toString()
-            } else if ((binding.sl1NextImage.tag as Int) == (binding.sl2NextImage.tag as Int) || (binding.sl2NextImage.tag as Int) == (binding.sl3NextImage.tag as Int) || (binding.sl1NextImage.tag as Int) == (binding.sl3NextImage.tag as Int)) {
+            } else if (slots[0].currentImageId == slots[1].currentImageId || slots[1].currentImageId == slots[2].currentImageId || slots[0].currentImageId == slots[2].currentImageId) {
                 Toast.makeText(this, "You did good.", Toast.LENGTH_SHORT).show()
                 score = currentBet
                 Utils.balance += score
@@ -140,33 +148,35 @@ class FirstGameActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
     }
 
-    fun setRandomValue(currentImage: ImageView, nextImage: ImageView, height: Int, image: Int, numRoll: Int, slot: SlotItem) {
-        currentImage.visibility = View.VISIBLE
-        currentImage.animate()
-            .translationY(-height.toFloat())
+    fun setRandomValue(slot: SlotItem, image: Int, numRoll: Int) {
+        slot.currentImage.visibility = View.VISIBLE
+        slot.currentImage.animate()
+            .translationY(-(binding.flSlot1.height.toFloat()))
             .setDuration(ANIMATION_DURATION).start()
 
-        nextImage.translationY = nextImage.height.toFloat()
-        nextImage.animate()
+        Log.d("TAG", binding.flSlot1.height.toFloat().toString())
+
+        slot.nextImage.translationY = binding.sl1NextImage.height.toFloat()
+        Log.d("TAG", slot.nextImage.height.toFloat().toString())
+        slot.nextImage.animate()
             .translationY(0f).setDuration(ANIMATION_DURATION)
             .setListener(object : Animator.AnimatorListener {
 
                 override fun onAnimationRepeat(animation: Animator) {}
 
                 override fun onAnimationEnd(animation: Animator) {
-                    currentImage.visibility = View.GONE
-                    setImage(currentImage, slot.oldValue%6, slot)
-                    currentImage.translationY = 0f
-                    if(slot.oldValue != numRoll) {
-                        setRandomValue(currentImage, nextImage, height, image, numRoll, slot)
+                    slot.currentImage.visibility = View.GONE
+                    setImage(slot.oldValue % 6, slot)
+                    slot.currentImage.translationY = 0f
+                    if (slot.oldValue != numRoll) {
+                        setRandomValue(slot, image, numRoll)
                         slot.oldValue++
-                    }
-                    else {
-                        slot.lastResult = 0
+                    } else {
+                        viewModel.updateTranslation(slot)
                         slot.oldValue = 0
-                        setImage(nextImage, image, slot)
-                        eventEnd()
+                        setImage(image, slot)
                         changeButtonState(true)
+                        eventEnd()
                         unlockOrientationChange()
                     }
                 }
@@ -181,21 +191,20 @@ class FirstGameActivity : AppCompatActivity() {
             }).start()
     }
 
-    private fun setImage(currentImage: ImageView, value: Int, slot: SlotItem) {
+    private fun setImage(value: Int, slot: SlotItem) {
         when (value) {
-            Utils.nineImage -> currentImage.setImageResource(R.drawable.nine_image)
-            Utils.jImage -> currentImage.setImageResource(R.drawable.j_image)
-            Utils.kImage -> currentImage.setImageResource(R.drawable.k_image)
-            Utils.aImage -> currentImage.setImageResource(R.drawable.a_image)
-            Utils.runeImage -> currentImage.setImageResource(R.drawable.rune_image)
-            Utils.wildImage -> currentImage.setImageResource(R.drawable.wild_image)
+            Utils.nineImage -> viewModel.updateImageIdInItem(slot, R.drawable.nine_image)
+            Utils.jImage -> viewModel.updateImageIdInItem(slot, R.drawable.j_image)
+            Utils.kImage -> viewModel.updateImageIdInItem(slot,R.drawable.k_image)
+            Utils.aImage -> viewModel.updateImageIdInItem(slot, R.drawable.a_image)
+            Utils.runeImage -> viewModel.updateImageIdInItem(slot, R.drawable.rune_image)
+            Utils.wildImage -> viewModel.updateImageIdInItem(slot, R.drawable.wild_image)
         }
-
-        currentImage.tag = value
-        slot.lastResult = value
     }
 
     companion object {
+
+        private const val FIRST_LAUNCH_KEY = "first_launch"
 
         private const val ANIMATION_DURATION = 250L
         fun newIntent(context: Context) = Intent(context, FirstGameActivity::class.java)
