@@ -6,8 +6,7 @@ import com.nile.fortu.game.R
 data class SlotItem(
     val id: String,
     val currentImage: ImageView,
-    var currentImageId: Int = R.drawable.j_image,
+    var currentImageId: Int? = null,
     val nextImage: ImageView,
-    var nextImageTranslationY: Float,
     var oldValue: Int = 0
 )

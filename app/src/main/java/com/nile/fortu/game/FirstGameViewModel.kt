@@ -10,44 +10,42 @@ import java.util.UUID
 
 class FirstGameViewModel : ViewModel() {
 
-    private val _slotsList = MutableLiveData(listOf<SlotItem>())
+    private val _slotList = MutableLiveData(listOf<SlotItem>())
     val slotList: LiveData<List<SlotItem>>
-        get() = _slotsList
+        get() = _slotList
 
-    private var countDown = 0
     private var currentBet = 0
     private var score = 0
 
-    fun createItemFromView(view: FrameLayout) {
+    fun createItemFromView(index: Int, view: FrameLayout) {
         val slotItem = SlotItem(
             id = UUID.randomUUID().toString(),
             currentImage = view.getChildAt(CURRENT_IMAGE_INDEX) as ImageView,
-            nextImage = view.getChildAt(NEXT_IMAGE_INDEX) as ImageView,
-            nextImageTranslationY = view.height.toFloat()
+            nextImage = view.getChildAt(NEXT_IMAGE_INDEX) as ImageView
         )
-        val listOfItems = _slotsList.value?.toMutableList()
-        listOfItems?.add(slotItem)
-        _slotsList.value = listOfItems
+        val listOfItems = slotList.value?.toMutableList() ?: mutableListOf()
+
+        if (listOfItems.size <= index) {
+            listOfItems.add(slotItem)
+        } else {
+            listOfItems.forEachIndexed { currentIndex, item ->
+                if (currentIndex == index) {
+                    slotItem.currentImageId = item.currentImageId
+                    listOfItems[currentIndex] = slotItem
+                }
+            }
+        }
+        _slotList.value = listOfItems
     }
 
     fun updateImageIdInItem(item: SlotItem, imageId: Int) {
-        val listOfItems = _slotsList.value?.toMutableList() ?: mutableListOf()
+        val listOfItems = _slotList.value?.toList() ?: listOf()
         listOfItems.forEach {
             if (item.id == it.id) {
                 it.currentImageId = imageId
             }
         }
-        _slotsList.value = listOfItems
-    }
-
-    fun updateTranslation(item: SlotItem) {
-        val listOfItems = _slotsList.value?.toMutableList() ?: mutableListOf()
-        listOfItems.forEach {
-            if (item.id == it.id) {
-                it.nextImageTranslationY = item.nextImage.translationY
-            }
-        }
-        _slotsList.value = listOfItems
+        _slotList.value = listOfItems
     }
 
     companion object {
