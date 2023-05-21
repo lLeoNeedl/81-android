@@ -65,7 +65,7 @@ class BonusGameActivity : AppCompatActivity() {
         rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
 
             override fun onAnimationStart(animation: Animation?) {
-
+                changeButtonState(false)
             }
 
             override fun onAnimationEnd(animation: Animation?) {
@@ -80,7 +80,7 @@ class BonusGameActivity : AppCompatActivity() {
                 } else {
                     saveEarnings(sector[sector.size - (degree + 1)].toInt())
                 }
-
+                changeButtonState(true)
             }
 
             override fun onAnimationRepeat(animation: Animation?) {
@@ -89,6 +89,11 @@ class BonusGameActivity : AppCompatActivity() {
         })
 
         binding.ivCircle.startAnimation(rotateAnimation)
+    }
+
+    fun changeButtonState(enabled: Boolean) {
+        binding.flSpin.isClickable = enabled
+        binding.flSpin.isFocusable = enabled
     }
 
     private fun saveEarnings(earned: Int) {
@@ -103,7 +108,6 @@ class BonusGameActivity : AppCompatActivity() {
         for (i in sector.indices) {
             sectorDegrees[i] = (i + 1) * sectorDegree
         }
-
     }
 
     companion object {

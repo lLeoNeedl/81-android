@@ -18,27 +18,44 @@
         android:text="@string/header_enter_phone"
         android:textAlignment="center" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+    <LinearLayout
+        android:id="@+id/llNumber"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginVertical="24dp"
-        app:boxBackgroundColor="@color/text_input_layout_bg_color"
-        app:boxCornerRadiusBottomEnd="@dimen/et_corner_radius"
-        app:boxCornerRadiusBottomStart="@dimen/et_corner_radius"
-        app:boxCornerRadiusTopEnd="@dimen/et_corner_radius"
-        app:boxCornerRadiusTopStart="@dimen/et_corner_radius"
-        app:boxStrokeColor="@color/text_input_layout_stroke_color">
+        android:layout_height="72dp"
+        android:paddingHorizontal="8dp"
+        android:background="@drawable/rectangle_527"
+        android:orientation="horizontal">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_phone_number"
-            android:layout_width="match_parent"
-            android:inputType="phone"
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:ccpDialog_keyboardAutoPopup="false"
+            app:ccp_arrowSize="16sp"
+            app:ccp_autoFormatNumber="true"
+            app:ccp_contentColor="@color/white"
+            app:ccp_defaultPhoneCode="380"
+            app:ccp_showArrow="true"
+            app:ccp_showFlag="true"
+            app:ccp_showFullName="false"
+            app:ccp_showNameCode="false"
+            app:ccp_showPhoneCode="true"
+            app:ccp_textSize="20sp" />
+
+        <EditText
+            android:id="@+id/etPhoneNumber"
             style="@style/secondaryTextStyle"
-            android:textCursorDrawable="@null"
-            android:layout_height="76dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:inputType="phone"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@null" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/fl_continue"
