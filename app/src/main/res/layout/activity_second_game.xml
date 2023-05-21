@@ -179,7 +179,6 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/btn_spin"
                 style="@style/SecondaryTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

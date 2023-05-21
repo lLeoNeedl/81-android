@@ -35,7 +35,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/menu_btn_gift"
+            android:src="@drawable/menu_btn_gift"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/tv_bonus_game" />
@@ -57,7 +57,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/menu_btn_logout"
+            android:src="@drawable/menu_btn_logout"
             android:contentDescription="@string/menu_btn_logout_description"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -101,8 +101,7 @@
         android:focusable="true"
         android:textAlignment="center"
         android:gravity="center"
-        android:background="?attr/selectableItemBackground"
-        android:text="@string/tv_return_to_menu"
+       android:text="@string/tv_return_to_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
