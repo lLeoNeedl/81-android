@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.nile.fortu.game.databinding.ActivityBonusGameBinding
 import com.nile.fortu.game.databinding.ActivityMenuBinding
 import java.util.*
+import kotlin.random.Random
 
 class BonusGameActivity : AppCompatActivity() {
 
@@ -22,8 +23,9 @@ class BonusGameActivity : AppCompatActivity() {
         "1000", "500", "200", "1000", "50", "100", "500", "200", "10", "200", "Jackpot", "100"
     )
     private val sectorDegrees = arrayOfNulls<Int>(sector.size)
-    private val random = Random()
     private var degree = 0
+    private var score = 0
+
     private var isSpinning = false
 
 
@@ -33,7 +35,8 @@ class BonusGameActivity : AppCompatActivity() {
 
         getDegreeFromSectors()
 
-        binding.bonusBalance.text = Util.balance.toString()
+        binding.tvBalance.text = Util.balance.toString()
+        binding.tvScore.text = score.toString()
 
         binding.flSpin.setOnClickListener {
             if (!isSpinning) {
@@ -48,10 +51,11 @@ class BonusGameActivity : AppCompatActivity() {
     }
 
     private fun spin() {
-        degree = random.nextInt(sector.size - 1)
+        degree = Random.nextInt(sector.size - 1)
+        val sectorDegree = sectorDegrees[degree]?.toFloat() ?: return
 
         val rotateAnimation = RotateAnimation(
-            0F, ((360 * sector.size) + sectorDegrees[degree]!!).toFloat(),
+            0F, ((360 * sector.size) + sectorDegree),
             RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f
         )
 
@@ -59,6 +63,7 @@ class BonusGameActivity : AppCompatActivity() {
         rotateAnimation.fillAfter = true
         rotateAnimation.interpolator = DecelerateInterpolator()
         rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
+
             override fun onAnimationStart(animation: Animation?) {
 
             }
@@ -70,9 +75,9 @@ class BonusGameActivity : AppCompatActivity() {
                 ).show()
                 isSpinning = false
 
-                if (sector[sector.size - (degree + 1)]=="Jackpot"){
+                if (sector[sector.size - (degree + 1)] == "Jackpot") {
                     saveEarnings(2000)
-                }else{
+                } else {
                     saveEarnings(sector[sector.size - (degree + 1)].toInt())
                 }
 
@@ -81,22 +86,21 @@ class BonusGameActivity : AppCompatActivity() {
             override fun onAnimationRepeat(animation: Animation?) {
 
             }
-
         })
 
-        binding.imageCircle.startAnimation(rotateAnimation)
+        binding.ivCircle.startAnimation(rotateAnimation)
     }
 
     private fun saveEarnings(earned: Int) {
-         Util.balance = Util.balance + earned
-        binding.bonusBalance.text = Util.balance.toString()
-        binding.bonusScore.text = earned.toString()
+        Util.balance = Util.balance + earned
+        binding.tvBalance.text = Util.balance.toString()
+        score = earned
+        binding.tvScore.text = score.toString()
     }
 
     private fun getDegreeFromSectors() {
-
         val sectorDegree = 360 / sector.size
-        for (i in 0..sector.size - 1) {
+        for (i in sector.indices) {
             sectorDegrees[i] = (i + 1) * sectorDegree
         }
 
