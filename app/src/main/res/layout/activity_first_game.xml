@@ -9,13 +9,14 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="-2dp"
+        android:contentDescription="@string/app_name"
         android:scaleType="centerCrop"
+        android:src="@drawable/first_game_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="-2dp"
-        android:src="@drawable/first_game_bg"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_return"
@@ -24,19 +25,19 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/btn_back_ripple"
+        android:contentDescription="@string/tv_return_to_menu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/tv_return_to_menu" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/frameLayout2"
         android:layout_width="116dp"
         android:layout_height="56dp"
-        android:layout_marginTop="36dp"
         android:layout_marginStart="16dp"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_marginTop="36dp"
         android:background="@drawable/statistics_box"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/frameLayout"
         app:layout_constraintStart_toEndOf="@+id/btn_return"
         app:layout_constraintTop_toTopOf="parent">
@@ -45,12 +46,13 @@
             style="@style/boxHeaderStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/box_header_balance"
             android:layout_gravity="center"
+            android:text="@string/box_header_balance"
             android:textAlignment="center"
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/tv_balance"
             style="@style/secondaryTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,11 +67,11 @@
         android:id="@+id/frameLayout"
         android:layout_width="116dp"
         android:layout_height="56dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="36dp"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/statistics_box"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -77,12 +79,13 @@
             style="@style/boxHeaderStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/box_header_win"
             android:layout_gravity="center"
+            android:text="@string/box_header_win"
             android:textAlignment="center"
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/tv_score"
             style="@style/secondaryTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +101,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/ll_slots"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -125,6 +128,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageButton
+                android:id="@+id/btn_decrease"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="10dp"
@@ -141,6 +145,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
+                    android:id="@+id/tv_bet"
                     style="@style/secondaryTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -152,6 +157,7 @@
             </FrameLayout>
 
             <ImageButton
+                android:id="@+id/btn_increase"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="10dp"
@@ -168,7 +174,7 @@
             android:background="@drawable/btn_spin_ripple"
             android:clickable="true"
             android:focusable="true"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintBottom_toTopOf="@+id/ll_slots"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -186,14 +192,88 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/ll_slots"
         android:layout_width="340dp"
         android:layout_height="254dp"
         android:layout_marginBottom="56dp"
         android:background="@drawable/game_space"
-        android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <FrameLayout
+            android:id="@+id/fl_slot1"
+            android:layout_width="100dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10sp">
+
+            <ImageView
+                android:id="@+id/sl1_currentImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:src="@drawable/j_image"
+                android:contentDescription="@string/image" />
+
+            <ImageView
+                android:id="@+id/sl1_nextImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/image" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_slot2"
+            android:layout_width="100dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10sp">
+
+            <ImageView
+                android:id="@+id/sl2_currentImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:src="@drawable/j_image"
+                android:contentDescription="@string/image" />
+
+            <ImageView
+                android:id="@+id/sl2_nextImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/image" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_slot3"
+            android:layout_width="100dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10sp">
+
+            <ImageView
+                android:id="@+id/sl3_currentImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:src="@drawable/j_image"
+                android:contentDescription="@string/image" />
+
+            <ImageView
+                android:id="@+id/sl3_nextImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/image" />
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
