@@ -6,12 +6,8 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.nile.fortu.game.databinding.ActivityFirstGameBinding
 import com.nile.fortu.game.slotImagesScroll.SlotItem
@@ -26,7 +22,7 @@ class FirstGameActivity : AppCompatActivity() {
     private lateinit var slots: List<SlotItem>
 
     private val viewModel by lazy {
-        ViewModelProvider(this)[FirstGameViewModel::class.java]
+        ViewModelProvider(this)[GameViewModel::class.java]
     }
 
     private val binding by lazy {
@@ -58,7 +54,7 @@ class FirstGameActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     this,
-                    "You don't have enough money",
+                    getString(R.string.message_not_enough_money),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -83,12 +79,12 @@ class FirstGameActivity : AppCompatActivity() {
         viewModel.slotList.observe(this) {
             slots = it
             binding.run {
-                sl1CurrentImage.setImageResource(it[0].currentImageId ?: R.drawable.j_image)
-                sl1NextImage.setImageResource(it[0].currentImageId ?: R.drawable.j_image)
-                sl2CurrentImage.setImageResource(it[1].currentImageId ?: R.drawable.j_image)
-                sl2NextImage.setImageResource(it[1].currentImageId ?: R.drawable.j_image)
-                sl3CurrentImage.setImageResource(it[2].currentImageId ?: R.drawable.j_image)
-                sl3NextImage.setImageResource(it[2].currentImageId ?: R.drawable.j_image)
+                sl1CurrentImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
+                sl1NextImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
+                sl2CurrentImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
+                sl2NextImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
+                sl3CurrentImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
+                sl3NextImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
             }
         }
 
@@ -160,12 +156,12 @@ class FirstGameActivity : AppCompatActivity() {
 
     private fun setImage(value: Int, slot: SlotItem) {
         when (value) {
-            Utils.nineImage -> viewModel.updateImageIdInItem(slot, R.drawable.nine_image)
-            Utils.jImage -> viewModel.updateImageIdInItem(slot, R.drawable.j_image)
-            Utils.kImage -> viewModel.updateImageIdInItem(slot, R.drawable.k_image)
-            Utils.aImage -> viewModel.updateImageIdInItem(slot, R.drawable.a_image)
-            Utils.runeImage -> viewModel.updateImageIdInItem(slot, R.drawable.rune_image)
-            Utils.wildImage -> viewModel.updateImageIdInItem(slot, R.drawable.wild_image)
+            Utils.FirstGameSlots.nineImage -> viewModel.updateImageIdInItem(slot, R.drawable.nine_image)
+            Utils.FirstGameSlots.jImage -> viewModel.updateImageIdInItem(slot, R.drawable.j_image)
+            Utils.FirstGameSlots.kImage -> viewModel.updateImageIdInItem(slot, R.drawable.k_image)
+            Utils.FirstGameSlots.aImage -> viewModel.updateImageIdInItem(slot, R.drawable.a_image)
+            Utils.FirstGameSlots.runeImage -> viewModel.updateImageIdInItem(slot, R.drawable.rune_image)
+            Utils.FirstGameSlots.wildImage -> viewModel.updateImageIdInItem(slot, R.drawable.wild_image)
         }
     }
 
@@ -174,21 +170,23 @@ class FirstGameActivity : AppCompatActivity() {
             countDown++
         } else {
             countDown = 0
-            if (slots[FIRST_SLOT_INDEX].currentImageId == slots[SECOND_SLOT_INDEX].currentImageId &&
-                slots[SECOND_SLOT_INDEX].currentImageId == slots[THIRD_SLOT_INDEX].currentImageId) {
-                Toast.makeText(this, "YOU WON!!!", Toast.LENGTH_SHORT).show()
-                viewModel.updateScore(currentBet * 2)
-            } else if (slots[FIRST_SLOT_INDEX].currentImageId == slots[SECOND_SLOT_INDEX].currentImageId ||
-                slots[SECOND_SLOT_INDEX].currentImageId == slots[THIRD_SLOT_INDEX].currentImageId ||
-                slots[FIRST_SLOT_INDEX].currentImageId == slots[THIRD_SLOT_INDEX].currentImageId
-            ) {
-                Toast.makeText(this, "You did good.", Toast.LENGTH_SHORT).show()
-                viewModel.updateScore(currentBet)
-            } else {
-                Toast.makeText(this, "You lost. Better luck next time.", Toast.LENGTH_SHORT).show()
-                Utils.balance -= currentBet
-                viewModel.updateScore(0)
+            val slotImages = slots.map { it.currentImageId }.toSet()
+            when (slotImages.size) {
+                1 -> {
+                    Toast.makeText(this, getString(R.string.winner_message), Toast.LENGTH_SHORT).show()
+                    viewModel.updateScore(currentBet * 2)
+                }
+                2 -> {
+                    Toast.makeText(this, getString(R.string.message_did_good), Toast.LENGTH_SHORT).show()
+                    viewModel.updateScore(currentBet)
+                }
+                else -> {
+                    Toast.makeText(this, getString(R.string.message_lost), Toast.LENGTH_SHORT).show()
+                    Utils.balance -= currentBet
+                    viewModel.updateScore(0)
+                }
             }
+            Utils.resetBalance()
             binding.tvBalance.text = Utils.balance.toString()
             unlockOrientationChange()
         }

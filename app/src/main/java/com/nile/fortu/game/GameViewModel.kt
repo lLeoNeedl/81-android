@@ -2,7 +2,6 @@ package com.nile.fortu.game
 
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +9,7 @@ import com.nile.fortu.game.slotImagesScroll.SlotItem
 import com.nile.fortu.game.slotImagesScroll.Utils
 import java.util.UUID
 
-class FirstGameViewModel : ViewModel() {
+class GameViewModel : ViewModel() {
 
     private val _slotList = MutableLiveData(listOf<SlotItem>())
     val slotList: LiveData<List<SlotItem>>

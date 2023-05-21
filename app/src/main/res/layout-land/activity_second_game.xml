@@ -15,7 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginBottom="-2dp"
-        android:src="@drawable/second_game_horizontal_bg"/>
+        android:src="@drawable/second_game_horizontal_bg"
+        android:contentDescription="@string/app_name" />
 
     <ImageButton
         android:id="@+id/btn_return"
@@ -50,6 +51,7 @@
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/tv_balance"
             style="@style/secondaryTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,6 +84,7 @@
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/tv_score"
             style="@style/secondaryTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,6 +126,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageButton
+                android:id="@+id/btn_decrease"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="10dp"
@@ -138,6 +142,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
+                    android:id="@+id/tv_bet"
                     style="@style/secondaryTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -149,6 +154,7 @@
             </FrameLayout>
 
             <ImageButton
+                android:id="@+id/btn_increase"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="10dp"
@@ -168,6 +174,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
+                android:id="@+id/btn_spin"
                 style="@style/secondaryTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -181,14 +188,136 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/fl_slots"
+        android:id="@+id/ll_slots"
         android:layout_width="340dp"
         android:layout_height="254dp"
         android:layout_marginStart="52dp"
         android:layout_marginBottom="24dp"
+        android:gravity="center"
         android:background="@drawable/game2_space"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <FrameLayout
+            android:id="@+id/fl_slot1"
+            android:layout_width="60dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10sp">
+
+            <ImageView
+                android:id="@+id/sl1_currentImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:src="@drawable/j_image_game2"
+                android:contentDescription="@string/image" />
+
+            <ImageView
+                android:id="@+id/sl1_nextImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/image" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_slot2"
+            android:layout_width="60dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10sp">
+
+            <ImageView
+                android:id="@+id/sl2_currentImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:src="@drawable/j_image_game2"
+                android:contentDescription="@string/image" />
+
+            <ImageView
+                android:id="@+id/sl2_nextImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/image" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_slot3"
+            android:layout_width="60dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10sp">
+
+            <ImageView
+                android:id="@+id/sl3_currentImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:src="@drawable/j_image_game2"
+                android:contentDescription="@string/image" />
+
+            <ImageView
+                android:id="@+id/sl3_nextImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/image" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_slot4"
+            android:layout_width="60dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10sp">
+
+            <ImageView
+                android:id="@+id/sl4_currentImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:src="@drawable/j_image_game2"
+                android:contentDescription="@string/image" />
+
+            <ImageView
+                android:id="@+id/sl4_nextImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/image" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_slot5"
+            android:layout_width="60dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10sp">
+
+            <ImageView
+                android:id="@+id/sl5_currentImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:src="@drawable/j_image_game2"
+                android:contentDescription="@string/image" />
+
+            <ImageView
+                android:id="@+id/sl5_nextImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/image" />
+
+        </FrameLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
