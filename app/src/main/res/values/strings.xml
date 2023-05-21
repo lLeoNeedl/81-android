@@ -26,7 +26,7 @@
     <string name="tv_bonus_game">Bonus game</string>
     <string name="wheel_description">Wheel</string>
     <string name="pointer_description">Pointer</string>
-    <string name="image">image</string>
+    <string name="slot_image">Slot image</string>
     <string name="winner_message">YOU WON!!!</string>
     <string name="message_did_good">You did good</string>
     <string name="message_lost">You lost. Better luck next time</string>

@@ -44,7 +44,7 @@
 
     <TextView
         android:id="@+id/tv_settings_header"
-        style="@style/baseTextStyle"
+        style="@style/BaseTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -74,7 +74,7 @@
             android:checked="true"
             android:text="@string/setting_music"
             android:textColor="@color/white"
-            android:theme="@style/switchStyle" />
+            android:theme="@style/SwitchStyle" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:layout_width="match_parent"
@@ -83,6 +83,6 @@
             android:checked="true"
             android:text="@string/setting_vibration"
             android:textColor="@color/white"
-            android:theme="@style/switchStyle" />
+            android:theme="@style/SwitchStyle" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstGameActivity">
+    tools:context=".games.FirstGameActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/tv_settings_header"
-        style="@style/baseTextStyle"
+        style="@style/BaseTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -65,7 +65,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_settings_header">
 
             <TextView
-                style="@style/boxHeaderStyle"
+                style="@style/BoxHeaderStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -75,7 +75,7 @@
 
             <TextView
                 android:id="@+id/tv_balance"
-                style="@style/secondaryTextStyle"
+                style="@style/SecondaryTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -98,7 +98,7 @@
             app:layout_constraintVertical_bias="0.494">
 
             <TextView
-                style="@style/boxHeaderStyle"
+                style="@style/BoxHeaderStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -108,7 +108,7 @@
 
             <TextView
                 android:id="@+id/tv_score"
-                style="@style/secondaryTextStyle"
+                style="@style/SecondaryTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -159,7 +159,7 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_circle">
 
         <TextView
-            style="@style/secondaryTextStyle"
+            style="@style/SecondaryTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

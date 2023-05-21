@@ -93,7 +93,7 @@
 
     <TextView
         android:id="@+id/tv_return_to_menu"
-        style="@style/baseTextStyle"
+        style="@style/BaseTextStyle"
         android:layout_width="236dp"
         android:layout_height="56dp"
         android:layout_marginBottom="36dp"

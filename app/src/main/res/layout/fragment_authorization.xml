@@ -9,7 +9,7 @@
     tools:context=".AuthorizationFragment">
 
     <TextView
-        style="@style/baseTextStyle"
+        style="@style/BaseTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="36dp"
@@ -56,7 +56,7 @@
 
             <TextView
                 android:id="@+id/tv_phone"
-                style="@style/secondaryTextStyle"
+                style="@style/SecondaryTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:layout_marginBottom="6dp"
@@ -66,7 +66,7 @@
 
             <TextView
                 android:id="@+id/tv_anonymous"
-                style="@style/secondaryTextStyle"
+                style="@style/SecondaryTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:layout_marginTop="6dp"
@@ -89,7 +89,7 @@
         android:focusable="true">
 
         <TextView
-            style="@style/secondaryTextStyle"
+            style="@style/SecondaryTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

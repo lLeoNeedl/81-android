@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstGameActivity">
+    tools:context=".games.FirstGameActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            style="@style/boxHeaderStyle"
+            style="@style/BoxHeaderStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/box_header_balance"
@@ -53,7 +53,7 @@
 
         <TextView
             android:id="@+id/tv_balance"
-            style="@style/secondaryTextStyle"
+            style="@style/SecondaryTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            style="@style/boxHeaderStyle"
+            style="@style/BoxHeaderStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/box_header_win"
@@ -86,7 +86,7 @@
 
         <TextView
             android:id="@+id/tv_score"
-            style="@style/secondaryTextStyle"
+            style="@style/SecondaryTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -146,7 +146,7 @@
 
                 <TextView
                     android:id="@+id/tv_bet"
-                    style="@style/secondaryTextStyle"
+                    style="@style/SecondaryTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -180,7 +180,7 @@
 
             <TextView
                 android:id="@+id/btn_spin"
-                style="@style/secondaryTextStyle"
+                style="@style/SecondaryTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -217,14 +217,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 tools:src="@drawable/j_image_game2"
-                android:contentDescription="@string/image" />
+                android:contentDescription="@string/slot_image" />
 
             <ImageView
                 android:id="@+id/sl1_nextImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="@string/image" />
+                android:contentDescription="@string/slot_image" />
 
         </FrameLayout>
 
@@ -241,14 +241,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 tools:src="@drawable/j_image_game2"
-                android:contentDescription="@string/image" />
+                android:contentDescription="@string/slot_image" />
 
             <ImageView
                 android:id="@+id/sl2_nextImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="@string/image" />
+                android:contentDescription="@string/slot_image" />
 
         </FrameLayout>
 
@@ -265,14 +265,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 tools:src="@drawable/j_image_game2"
-                android:contentDescription="@string/image" />
+                android:contentDescription="@string/slot_image" />
 
             <ImageView
                 android:id="@+id/sl3_nextImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="@string/image" />
+                android:contentDescription="@string/slot_image" />
 
         </FrameLayout>
 
@@ -289,14 +289,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 tools:src="@drawable/j_image_game2"
-                android:contentDescription="@string/image" />
+                android:contentDescription="@string/slot_image" />
 
             <ImageView
                 android:id="@+id/sl4_nextImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="@string/image" />
+                android:contentDescription="@string/slot_image" />
 
         </FrameLayout>
 
@@ -313,14 +313,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 tools:src="@drawable/j_image_game2"
-                android:contentDescription="@string/image" />
+                android:contentDescription="@string/slot_image" />
 
             <ImageView
                 android:id="@+id/sl5_nextImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="@string/image" />
+                android:contentDescription="@string/slot_image" />
 
         </FrameLayout>
 

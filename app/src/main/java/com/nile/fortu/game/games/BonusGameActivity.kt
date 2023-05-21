@@ -1,4 +1,4 @@
-package com.nile.fortu.game
+package com.nile.fortu.game.games
 
 import android.content.Context
 import android.content.Intent
@@ -9,8 +9,6 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.Toast
 import com.nile.fortu.game.databinding.ActivityBonusGameBinding
-import com.nile.fortu.game.databinding.ActivityMenuBinding
-import java.util.*
 import kotlin.random.Random
 
 class BonusGameActivity : AppCompatActivity() {
@@ -35,7 +33,7 @@ class BonusGameActivity : AppCompatActivity() {
 
         getDegreeFromSectors()
 
-        binding.tvBalance.text = Util.balance.toString()
+        binding.tvBalance.text = Utils.balance.toString()
         binding.tvScore.text = score.toString()
 
         binding.flSpin.setOnClickListener {
@@ -97,8 +95,8 @@ class BonusGameActivity : AppCompatActivity() {
     }
 
     private fun saveEarnings(earned: Int) {
-        Util.balance = Util.balance + earned
-        binding.tvBalance.text = Util.balance.toString()
+        Utils.balance = Utils.balance + earned
+        binding.tvBalance.text = Utils.balance.toString()
         score = earned
         binding.tvScore.text = score.toString()
     }

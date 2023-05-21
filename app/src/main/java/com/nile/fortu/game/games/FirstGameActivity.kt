@@ -1,4 +1,4 @@
-package com.nile.fortu.game
+package com.nile.fortu.game.games
 
 import android.animation.Animator
 import android.content.Context
@@ -9,13 +9,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.nile.fortu.game.R
 import com.nile.fortu.game.databinding.ActivityFirstGameBinding
-import com.nile.fortu.game.databinding.ActivitySecondGameBinding
-import com.nile.fortu.game.slotImagesScroll.SlotItem
-import com.nile.fortu.game.slotImagesScroll.Utils
 import kotlin.random.Random
 
-class SecondGameActivity : AppCompatActivity() {
+class FirstGameActivity : AppCompatActivity() {
 
     private var countDown = 0
     private var currentBet = 0
@@ -27,20 +25,14 @@ class SecondGameActivity : AppCompatActivity() {
     }
 
     private val binding by lazy {
-        ActivitySecondGameBinding.inflate(layoutInflater)
+        ActivityFirstGameBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val listOfViews = listOf(
-            binding.flSlot1,
-            binding.flSlot2,
-            binding.flSlot3,
-            binding.flSlot4,
-            binding.flSlot5
-        )
+        val listOfViews = listOf(binding.flSlot1, binding.flSlot2, binding.flSlot3)
         listOfViews.forEachIndexed { index, frameLayout ->
             viewModel.createItemFromView(index, frameLayout)
         }
@@ -54,7 +46,7 @@ class SecondGameActivity : AppCompatActivity() {
                 slots.forEach {
                     setRandomValue(
                         it,
-                        Random.nextInt(8),
+                        Random.nextInt(6),
                         Random.nextInt(15 - 5 + 1) + 5
                     )
                 }
@@ -86,16 +78,12 @@ class SecondGameActivity : AppCompatActivity() {
         viewModel.slotList.observe(this) {
             slots = it
             binding.run {
-                sl1CurrentImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl1NextImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl2CurrentImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl2NextImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl3CurrentImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl3NextImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl4CurrentImage.setImageResource(it[FOURTH_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl4NextImage.setImageResource(it[FOURTH_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl5CurrentImage.setImageResource(it[FIFTH_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl5NextImage.setImageResource(it[FIFTH_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
+                sl1CurrentImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
+                sl1NextImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
+                sl2CurrentImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
+                sl2NextImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
+                sl3CurrentImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
+                sl3NextImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageId ?: R.drawable.j_image)
             }
         }
 
@@ -126,7 +114,7 @@ class SecondGameActivity : AppCompatActivity() {
 
                 override fun onAnimationEnd(animation: Animator) {
                     slot.currentImage.visibility = View.GONE
-                    setImage(slot.oldValue % 8, slot)
+                    setImage(slot.oldValue % 6, slot)
                     slot.currentImage.translationY = 0f
                     if (slot.oldValue != numRoll) {
                         setRandomValue(slot, image, numRoll)
@@ -167,19 +155,23 @@ class SecondGameActivity : AppCompatActivity() {
 
     private fun setImage(value: Int, slot: SlotItem) {
         when (value) {
-            Utils.SecondGameUtils.jImage -> viewModel.updateImageIdInItem(slot, R.drawable.j_image_game2)
-            Utils.SecondGameUtils.tenImage -> viewModel.updateImageIdInItem(slot, R.drawable.ten_image)
-            Utils.SecondGameUtils.qImage -> viewModel.updateImageIdInItem(slot, R.drawable.q_image)
-            Utils.SecondGameUtils.kImage -> viewModel.updateImageIdInItem(slot, R.drawable.k_image_game2)
-            Utils.SecondGameUtils.horseImage -> viewModel.updateImageIdInItem(slot, R.drawable.horse_image)
-            Utils.SecondGameUtils.dragonImage -> viewModel.updateImageIdInItem(slot, R.drawable.dragon_image)
-            Utils.SecondGameUtils.flowerImage -> viewModel.updateImageIdInItem(slot, R.drawable.flower_image)
-            Utils.SecondGameUtils.logoImage -> viewModel.updateImageIdInItem(slot, R.drawable.logo_image)
+            Utils.FirstGameSlots.nineImage -> viewModel.updateImageIdInItem(slot,
+                R.drawable.nine_image
+            )
+            Utils.FirstGameSlots.jImage -> viewModel.updateImageIdInItem(slot, R.drawable.j_image)
+            Utils.FirstGameSlots.kImage -> viewModel.updateImageIdInItem(slot, R.drawable.k_image)
+            Utils.FirstGameSlots.aImage -> viewModel.updateImageIdInItem(slot, R.drawable.a_image)
+            Utils.FirstGameSlots.runeImage -> viewModel.updateImageIdInItem(slot,
+                R.drawable.rune_image
+            )
+            Utils.FirstGameSlots.wildImage -> viewModel.updateImageIdInItem(slot,
+                R.drawable.wild_image
+            )
         }
     }
 
     fun eventEnd() {
-        if (countDown < 4) {
+        if (countDown < 2) {
             countDown++
         } else {
             countDown = 0
@@ -187,13 +179,9 @@ class SecondGameActivity : AppCompatActivity() {
             when (slotImages.size) {
                 1 -> {
                     Toast.makeText(this, getString(R.string.winner_message), Toast.LENGTH_SHORT).show()
-                    viewModel.updateScore(currentBet * 3)
-                }
-                2 -> {
-                    Toast.makeText(this, getString(R.string.message_excellent), Toast.LENGTH_SHORT).show()
                     viewModel.updateScore(currentBet * 2)
                 }
-                3 -> {
+                2 -> {
                     Toast.makeText(this, getString(R.string.message_did_good), Toast.LENGTH_SHORT).show()
                     viewModel.updateScore(currentBet)
                 }
@@ -210,14 +198,12 @@ class SecondGameActivity : AppCompatActivity() {
     }
 
     companion object {
+
         private const val FIRST_SLOT_INDEX = 0
         private const val SECOND_SLOT_INDEX = 1
         private const val THIRD_SLOT_INDEX = 2
-        private const val FOURTH_SLOT_INDEX = 3
-        private const val FIFTH_SLOT_INDEX = 4
 
         private const val ANIMATION_DURATION = 250L
-
-        fun newIntent(context: Context) = Intent(context, SecondGameActivity::class.java)
+        fun newIntent(context: Context) = Intent(context, FirstGameActivity::class.java)
     }
 }

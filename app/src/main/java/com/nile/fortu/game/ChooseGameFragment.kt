@@ -1,13 +1,14 @@
 package com.nile.fortu.game
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.nile.fortu.game.databinding.FragmentChooseGameBinding
-import com.nile.fortu.game.databinding.FragmentMenuBinding
+import com.nile.fortu.game.games.BonusGameActivity
+import com.nile.fortu.game.games.FirstGameActivity
+import com.nile.fortu.game.games.SecondGameActivity
 
 class ChooseGameFragment : Fragment() {
 

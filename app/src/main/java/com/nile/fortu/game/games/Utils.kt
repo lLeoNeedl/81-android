@@ -1,4 +1,4 @@
-package com.nile.fortu.game.slotImagesScroll
+package com.nile.fortu.game.games
 
 sealed class Utils {
     object FirstGameSlots {

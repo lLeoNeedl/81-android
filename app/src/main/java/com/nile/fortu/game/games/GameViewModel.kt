@@ -1,12 +1,10 @@
-package com.nile.fortu.game
+package com.nile.fortu.game.games
 
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.nile.fortu.game.slotImagesScroll.SlotItem
-import com.nile.fortu.game.slotImagesScroll.Utils
 import java.util.UUID
 
 class GameViewModel : ViewModel() {

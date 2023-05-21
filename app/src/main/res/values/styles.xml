@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="baseTextStyle">
+    <style name="BaseTextStyle">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/sansita_one_font</item>
     </style>
 
-    <style name="secondaryTextStyle" parent="baseTextStyle">
+    <style name="SecondaryTextStyle" parent="BaseTextStyle">
         <item name="android:textSize">20sp</item>
     </style>
     
-    <style name="boxHeaderStyle" parent="baseTextStyle">
+    <style name="BoxHeaderStyle" parent="BaseTextStyle">
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="switchStyle" parent="Theme.App">
+    <style name="SwitchStyle" parent="Theme.App">
         <item name="colorAccent">@color/orange</item>
         <item name="android:fontFamily">@font/sansita_one_font</item>
         <item name="android:textSize">24sp</item>

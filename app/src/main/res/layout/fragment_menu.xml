@@ -84,7 +84,7 @@
             android:focusable="true">
 
             <TextView
-                style="@style/secondaryTextStyle"
+                style="@style/SecondaryTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -104,7 +104,7 @@
             android:focusable="true">
 
             <TextView
-                style="@style/secondaryTextStyle"
+                style="@style/SecondaryTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -122,7 +122,7 @@
             android:focusable="true">
 
             <TextView
-                style="@style/secondaryTextStyle"
+                style="@style/SecondaryTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

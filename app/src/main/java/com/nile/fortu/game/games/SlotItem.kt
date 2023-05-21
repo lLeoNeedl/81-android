@@ -1,7 +1,6 @@
-package com.nile.fortu.game.slotImagesScroll
+package com.nile.fortu.game.games
 
 import android.widget.ImageView
-import com.nile.fortu.game.R
 
 data class SlotItem(
     val id: String,
