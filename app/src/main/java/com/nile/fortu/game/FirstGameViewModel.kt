@@ -2,10 +2,12 @@ package com.nile.fortu.game
 
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nile.fortu.game.slotImagesScroll.SlotItem
+import com.nile.fortu.game.slotImagesScroll.Utils
 import java.util.UUID
 
 class FirstGameViewModel : ViewModel() {
@@ -14,8 +16,13 @@ class FirstGameViewModel : ViewModel() {
     val slotList: LiveData<List<SlotItem>>
         get() = _slotList
 
-    private var currentBet = 0
-    private var score = 0
+    private val _currentBet = MutableLiveData(0)
+    val currentBet: LiveData<Int>
+        get() = _currentBet
+
+    private val _score = MutableLiveData(0)
+    val score: LiveData<Int>
+        get() = _score
 
     fun createItemFromView(index: Int, view: FrameLayout) {
         val slotItem = SlotItem(
@@ -46,6 +53,23 @@ class FirstGameViewModel : ViewModel() {
             }
         }
         _slotList.value = listOfItems
+    }
+
+    fun increaseBet() {
+        var bet = _currentBet.value ?: 0
+        bet += 100
+        _currentBet.value = bet
+    }
+
+    fun decreaseBet() {
+        var bet = _currentBet.value ?: 0
+        bet -= 100
+        _currentBet.value = bet
+    }
+
+    fun updateScore(score: Int) {
+        _score.value = score
+        Utils.balance += score
     }
 
     companion object {

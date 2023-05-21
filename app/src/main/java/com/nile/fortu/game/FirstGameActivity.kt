@@ -22,7 +22,6 @@ class FirstGameActivity : AppCompatActivity() {
 
     private var countDown = 0
     private var currentBet = 0
-    private var score = 0
 
     private lateinit var slots: List<SlotItem>
 
@@ -43,10 +42,44 @@ class FirstGameActivity : AppCompatActivity() {
             viewModel.createItemFromView(index, frameLayout)
         }
 
-        binding.tvBet.text = currentBet.toString()
-        binding.tvBalance.text = Utils.balance.toString()
-        binding.tvScore.text = score.toString()
+        observeViewModel()
 
+        binding.tvBalance.text = Utils.balance.toString()
+
+        binding.flSpin.setOnClickListener {
+            if (currentBet <= Utils.balance) {
+                slots.forEach {
+                    setRandomValue(
+                        it,
+                        Random.nextInt(6),
+                        Random.nextInt(15 - 5 + 1) + 5
+                    )
+                }
+            } else {
+                Toast.makeText(
+                    this,
+                    "You don't have enough money",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        binding.btnIncrease.setOnClickListener {
+            viewModel.increaseBet()
+        }
+
+        binding.btnDecrease.setOnClickListener {
+            if (currentBet != 0) {
+                viewModel.decreaseBet()
+            }
+        }
+
+        binding.btnReturn.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun observeViewModel() {
         viewModel.slotList.observe(this) {
             slots = it
             binding.run {
@@ -59,83 +92,18 @@ class FirstGameActivity : AppCompatActivity() {
             }
         }
 
-        binding.flSpin.setOnClickListener {
-            if (currentBet <= Utils.balance) {
-                slots.forEach {
-                    setRandomValue(
-                        it,
-                        Random.nextInt(6),
-                        Random.nextInt(15 - 5 + 1) + 5
-                    )
-                }
-            } else {
-                Toast.makeText(this, "You don't have enough money", Toast.LENGTH_SHORT).show()
-            }
+        viewModel.currentBet.observe(this) {
+            currentBet = it
+            binding.tvBet.text = it.toString()
         }
 
-        binding.btnIncrease.setOnClickListener {
-            increaseBet()
+        viewModel.score.observe(this) {
+            binding.tvScore.text = it.toString()
         }
-
-        binding.btnDecrease.setOnClickListener {
-            if (currentBet != 0) {
-                decreaseBet()
-            }
-        }
-
-        binding.btnReturn.setOnClickListener {
-            finish()
-        }
-    }
-
-    private fun increaseBet() {
-        currentBet += 100
-        binding.tvBet.text = currentBet.toString()
-    }
-
-    private fun decreaseBet() {
-        currentBet -= 100
-        binding.tvBet.text = currentBet.toString()
-    }
-
-    fun eventEnd() {
-        if (countDown < 2) {
-            countDown++
-        } else {
-            countDown = 0
-            if (slots[0]!!.currentImageId == slots[1]!!.currentImageId && slots[1]!!.currentImageId == slots[2]!!.currentImageId) {
-                Toast.makeText(this, "YOU WON!!!", Toast.LENGTH_SHORT).show()
-                score = currentBet * 2
-                Utils.balance += score
-                binding.tvBalance.text = Utils.balance.toString()
-            } else if (slots[0]!!.currentImageId == slots[1]!!.currentImageId || slots[1]!!.currentImageId == slots[2]!!.currentImageId || slots[0]!!.currentImageId == slots[2]!!.currentImageId) {
-                Toast.makeText(this, "You did good.", Toast.LENGTH_SHORT).show()
-                score = currentBet
-                Utils.balance += score
-                binding.tvBalance.text = Utils.balance.toString()
-            } else {
-                Toast.makeText(this, "You lost. Better luck next time.", Toast.LENGTH_SHORT).show()
-                Utils.balance -= currentBet
-                binding.tvBalance.text = Utils.balance.toString()
-            }
-        }
-        binding.tvScore.text = score.toString()
-    }
-
-    fun changeButtonState(enabled: Boolean) {
-        binding.flSpin.isClickable = enabled
-        binding.flSpin.isFocusable = enabled
-    }
-
-    fun lockOrientationChange() {
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED
-    }
-
-    fun unlockOrientationChange() {
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
     }
 
     fun setRandomValue(slot: SlotItem, image: Int, numRoll: Int) {
+        lockOrientationChange()
         slot.currentImage.visibility = View.VISIBLE
         slot.currentImage.animate()
             .translationY(-(binding.flSlot1.height.toFloat()))
@@ -161,7 +129,6 @@ class FirstGameActivity : AppCompatActivity() {
                         setImage(image, slot)
                         eventEnd()
                         changeButtonState(true)
-                        unlockOrientationChange()
                     }
                 }
 
@@ -169,24 +136,70 @@ class FirstGameActivity : AppCompatActivity() {
 
                 override fun onAnimationStart(animation: Animator) {
                     changeButtonState(false)
-                    lockOrientationChange()
                 }
 
             }).start()
+    }
+
+    fun changeButtonState(enabled: Boolean) {
+        binding.flSpin.isClickable = enabled
+        binding.flSpin.isFocusable = enabled
+        binding.btnIncrease.isClickable = enabled
+        binding.btnIncrease.isFocusable = enabled
+        binding.btnDecrease.isClickable = enabled
+        binding.btnDecrease.isFocusable = enabled
+    }
+
+    private fun lockOrientationChange() {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED
+    }
+
+    private fun unlockOrientationChange() {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
     }
 
     private fun setImage(value: Int, slot: SlotItem) {
         when (value) {
             Utils.nineImage -> viewModel.updateImageIdInItem(slot, R.drawable.nine_image)
             Utils.jImage -> viewModel.updateImageIdInItem(slot, R.drawable.j_image)
-            Utils.kImage -> viewModel.updateImageIdInItem(slot,R.drawable.k_image)
+            Utils.kImage -> viewModel.updateImageIdInItem(slot, R.drawable.k_image)
             Utils.aImage -> viewModel.updateImageIdInItem(slot, R.drawable.a_image)
             Utils.runeImage -> viewModel.updateImageIdInItem(slot, R.drawable.rune_image)
             Utils.wildImage -> viewModel.updateImageIdInItem(slot, R.drawable.wild_image)
         }
     }
 
+    fun eventEnd() {
+        if (countDown < 2) {
+            countDown++
+        } else {
+            countDown = 0
+            if (slots[FIRST_SLOT_INDEX].currentImageId == slots[SECOND_SLOT_INDEX].currentImageId &&
+                slots[SECOND_SLOT_INDEX].currentImageId == slots[THIRD_SLOT_INDEX].currentImageId) {
+                Toast.makeText(this, "YOU WON!!!", Toast.LENGTH_SHORT).show()
+                viewModel.updateScore(currentBet * 2)
+            } else if (slots[FIRST_SLOT_INDEX].currentImageId == slots[SECOND_SLOT_INDEX].currentImageId ||
+                slots[SECOND_SLOT_INDEX].currentImageId == slots[THIRD_SLOT_INDEX].currentImageId ||
+                slots[FIRST_SLOT_INDEX].currentImageId == slots[THIRD_SLOT_INDEX].currentImageId
+            ) {
+                Toast.makeText(this, "You did good.", Toast.LENGTH_SHORT).show()
+                viewModel.updateScore(currentBet)
+            } else {
+                Toast.makeText(this, "You lost. Better luck next time.", Toast.LENGTH_SHORT).show()
+                Utils.balance -= currentBet
+                viewModel.updateScore(0)
+            }
+            binding.tvBalance.text = Utils.balance.toString()
+            unlockOrientationChange()
+        }
+    }
+
     companion object {
+
+        private const val FIRST_SLOT_INDEX = 0
+        private const val SECOND_SLOT_INDEX = 1
+        private const val THIRD_SLOT_INDEX = 2
+
         private const val ANIMATION_DURATION = 250L
         fun newIntent(context: Context) = Intent(context, FirstGameActivity::class.java)
     }
