@@ -32,16 +32,16 @@ class SecondGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val listOfViews = listOf(
-            binding.flSlot1,
-            binding.flSlot2,
-            binding.flSlot3,
-            binding.flSlot4,
-            binding.flSlot5
-        )
-        listOfViews.forEachIndexed { index, frameLayout ->
-            viewModel.createItemFromView(index, frameLayout)
-        }
+//        val listOfViews = listOf(
+//            binding.flSlot1,
+//            binding.flSlot2,
+//            binding.flSlot3,
+//            binding.flSlot4,
+//            binding.flSlot5
+//        )
+//        listOfViews.forEachIndexed { index, frameLayout ->
+//            viewModel.createItemFromView(index, frameLayout)
+//        }
 
         observeViewModel()
 
@@ -90,16 +90,16 @@ class SecondGameActivity : AppCompatActivity() {
         viewModel.slotList.observe(this) {
             slots = it
             binding.run {
-                sl1CurrentImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl1NextImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl2CurrentImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl2NextImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl3CurrentImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl3NextImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl4CurrentImage.setImageResource(it[FOURTH_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl4NextImage.setImageResource(it[FOURTH_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl5CurrentImage.setImageResource(it[FIFTH_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
-                sl5NextImage.setImageResource(it[FIFTH_SLOT_INDEX].currentImageId ?: R.drawable.j_image_game2)
+                sl1CurrentImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
+                sl1NextImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
+                sl2CurrentImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
+                sl2NextImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
+                sl3CurrentImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
+                sl3NextImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
+                sl4CurrentImage.setImageResource(it[FOURTH_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
+                sl4NextImage.setImageResource(it[FOURTH_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
+                sl5CurrentImage.setImageResource(it[FIFTH_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
+                sl5NextImage.setImageResource(it[FIFTH_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
             }
         }
 
@@ -201,7 +201,7 @@ class SecondGameActivity : AppCompatActivity() {
             countDown++
         } else {
             countDown = 0
-            val slotImages = slots.map { it.currentImageId }.toSet()
+            val slotImages = slots.map { it.currentImageIndex }.toSet()
             when (slotImages.size) {
                 1 -> {
                     Toast.makeText(this, getString(R.string.winner_message), Toast.LENGTH_SHORT).show()

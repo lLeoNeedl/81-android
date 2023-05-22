@@ -5,7 +5,7 @@ import android.widget.ImageView
 data class SlotItem(
     val id: String,
     val currentImage: ImageView,
-    var currentImageId: Int? = null,
+    var currentImageIndex: Int = 1,
     val nextImage: ImageView,
     var oldValue: Int = 0
 )

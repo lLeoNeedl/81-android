@@ -202,17 +202,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/fl_slot1"
             android:layout_width="100dp"
             android:layout_height="220dp"
             android:layout_gravity="center_vertical"
+            android:orientation="vertical"
             android:padding="10sp">
+
+            <ImageView
+                android:id="@+id/sl1_prevImage"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                tools:src="@drawable/j_image"
+                android:contentDescription="@string/slot_image" />
 
             <ImageView
                 android:id="@+id/sl1_currentImage"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_gravity="center"
                 tools:src="@drawable/j_image"
                 android:contentDescription="@string/slot_image" />
@@ -220,23 +229,33 @@
             <ImageView
                 android:id="@+id/sl1_nextImage"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_gravity="center"
+                tools:src="@drawable/j_image"
                 android:contentDescription="@string/slot_image" />
 
-        </FrameLayout>
+        </LinearLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/fl_slot2"
             android:layout_width="100dp"
             android:layout_height="220dp"
             android:layout_gravity="center_vertical"
+            android:orientation="vertical"
             android:padding="10sp">
+
+            <ImageView
+                android:id="@+id/sl2_prevImage"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                tools:src="@drawable/j_image"
+                android:contentDescription="@string/slot_image" />
 
             <ImageView
                 android:id="@+id/sl2_currentImage"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_gravity="center"
                 tools:src="@drawable/j_image"
                 android:contentDescription="@string/slot_image" />
@@ -244,23 +263,33 @@
             <ImageView
                 android:id="@+id/sl2_nextImage"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_gravity="center"
+                tools:src="@drawable/j_image"
                 android:contentDescription="@string/slot_image" />
 
-        </FrameLayout>
+        </LinearLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/fl_slot3"
             android:layout_width="100dp"
             android:layout_height="220dp"
             android:layout_gravity="center_vertical"
+            android:orientation="vertical"
             android:padding="10sp">
+
+            <ImageView
+                android:id="@+id/sl3_prevImage"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                tools:src="@drawable/j_image"
+                android:contentDescription="@string/slot_image" />
 
             <ImageView
                 android:id="@+id/sl3_currentImage"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_gravity="center"
                 tools:src="@drawable/j_image"
                 android:contentDescription="@string/slot_image" />
@@ -268,11 +297,12 @@
             <ImageView
                 android:id="@+id/sl3_nextImage"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_gravity="center"
+                tools:src="@drawable/j_image"
                 android:contentDescription="@string/slot_image" />
 
-        </FrameLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

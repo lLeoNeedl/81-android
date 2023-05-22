@@ -1,7 +1,7 @@
 package com.nile.fortu.game.games
 
-import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,7 +21,7 @@ class GameViewModel : ViewModel() {
     val score: LiveData<Int>
         get() = _score
 
-    fun createItemFromView(index: Int, view: FrameLayout) {
+    fun createItemFromView(index: Int, view: LinearLayout) {
         val slotItem = SlotItem(
             id = UUID.randomUUID().toString(),
             currentImage = view.getChildAt(CURRENT_IMAGE_INDEX) as ImageView,
@@ -34,7 +34,7 @@ class GameViewModel : ViewModel() {
         } else {
             listOfItems.forEachIndexed { currentIndex, item ->
                 if (currentIndex == index) {
-                    slotItem.currentImageId = item.currentImageId
+                    slotItem.currentImageIndex = item.currentImageIndex
                     listOfItems[currentIndex] = slotItem
                 }
             }
@@ -42,11 +42,11 @@ class GameViewModel : ViewModel() {
         _slotList.value = listOfItems
     }
 
-    fun updateImageIdInItem(item: SlotItem, imageId: Int) {
+    fun updateImageIdInItem(item: SlotItem, imageIndex: Int) {
         val listOfItems = _slotList.value?.toList() ?: listOf()
         listOfItems.forEach {
             if (item.id == it.id) {
-                it.currentImageId = imageId
+                it.currentImageIndex = imageIndex
             }
         }
         _slotList.value = listOfItems
@@ -70,8 +70,8 @@ class GameViewModel : ViewModel() {
     }
 
     companion object {
-        private const val CURRENT_IMAGE_INDEX = 0
-        private const val NEXT_IMAGE_INDEX = 1
+        private const val CURRENT_IMAGE_INDEX = 1
+        private const val NEXT_IMAGE_INDEX = 2
         const val MIN_BET = 20
     }
 }
