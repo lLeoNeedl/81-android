@@ -13,7 +13,7 @@ class GameViewModel : ViewModel() {
     val slotList: LiveData<List<SlotItem>>
         get() = _slotList
 
-    private val _currentBet = MutableLiveData(0)
+    private val _currentBet = MutableLiveData(MIN_BET)
     val currentBet: LiveData<Int>
         get() = _currentBet
 
@@ -54,13 +54,13 @@ class GameViewModel : ViewModel() {
 
     fun increaseBet() {
         var bet = _currentBet.value ?: 0
-        bet += 100
+        bet += 20
         _currentBet.value = bet
     }
 
     fun decreaseBet() {
         var bet = _currentBet.value ?: 0
-        bet -= 100
+        bet -= 20
         _currentBet.value = bet
     }
 
@@ -72,5 +72,6 @@ class GameViewModel : ViewModel() {
     companion object {
         private const val CURRENT_IMAGE_INDEX = 0
         private const val NEXT_IMAGE_INDEX = 1
+        const val MIN_BET = 20
     }
 }

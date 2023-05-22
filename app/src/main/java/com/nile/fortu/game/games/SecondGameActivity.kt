@@ -16,7 +16,7 @@ import kotlin.random.Random
 class SecondGameActivity : AppCompatActivity() {
 
     private var countDown = 0
-    private var currentBet = 0
+    private var currentBet = GameViewModel.MIN_BET
 
     private lateinit var slots: List<SlotItem>
 
@@ -48,7 +48,7 @@ class SecondGameActivity : AppCompatActivity() {
         binding.tvBalance.text = Utils.balance.toString()
 
         binding.flSpin.setOnClickListener {
-            if (currentBet <= Utils.balance) {
+            if (currentBet <= Utils.balance && currentBet >= GameViewModel.MIN_BET) {
                 slots.forEach {
                     setRandomValue(
                         it,
@@ -56,10 +56,16 @@ class SecondGameActivity : AppCompatActivity() {
                         Random.nextInt(15 - 5 + 1) + 5
                     )
                 }
-            } else {
+            } else if (currentBet > Utils.balance) {
                 Toast.makeText(
                     this,
                     getString(R.string.message_not_enough_money),
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    this,
+                    getString(R.string.minimal_bet_message),
                     Toast.LENGTH_SHORT
                 ).show()
             }

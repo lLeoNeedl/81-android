@@ -32,4 +32,5 @@
     <string name="message_lost">You lost. Better luck next time</string>
     <string name="message_excellent">Excellent!</string>
     <string name="message_not_enough_money">You don\'t have enough money</string>
+    <string name="minimal_bet_message">Minimal bet is 20</string>
 </resources>
