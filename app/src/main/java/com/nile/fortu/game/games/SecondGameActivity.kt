@@ -130,14 +130,14 @@ class SecondGameActivity : AppCompatActivity() {
 
                 override fun onAnimationEnd(animation: Animator) {
                     slot.currentImage.visibility = View.GONE
-                    setImage(slot.oldValue % 8, slot)
+//                    setImage(slot.oldValue % 8, slot)
                     slot.currentImage.translationY = 0f
                     if (slot.oldValue != numRoll) {
                         setRandomValue(slot, image, numRoll)
                         slot.oldValue++
                     } else {
                         slot.oldValue = 0
-                        setImage(image, slot)
+//                        setImage(image, slot)
                         eventEnd()
                         changeButtonState(true)
                     }
@@ -169,32 +169,32 @@ class SecondGameActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
     }
 
-    private fun setImage(value: Int, slot: SlotItem) {
-        when (value) {
-            Utils.SecondGameUtils.jImage -> viewModel.updateImageIdInItem(slot,
-                R.drawable.j_image_game2
-            )
-            Utils.SecondGameUtils.tenImage -> viewModel.updateImageIdInItem(slot,
-                R.drawable.ten_image
-            )
-            Utils.SecondGameUtils.qImage -> viewModel.updateImageIdInItem(slot, R.drawable.q_image)
-            Utils.SecondGameUtils.kImage -> viewModel.updateImageIdInItem(slot,
-                R.drawable.k_image_game2
-            )
-            Utils.SecondGameUtils.horseImage -> viewModel.updateImageIdInItem(slot,
-                R.drawable.horse_image
-            )
-            Utils.SecondGameUtils.dragonImage -> viewModel.updateImageIdInItem(slot,
-                R.drawable.dragon_image
-            )
-            Utils.SecondGameUtils.flowerImage -> viewModel.updateImageIdInItem(slot,
-                R.drawable.flower_image
-            )
-            Utils.SecondGameUtils.logoImage -> viewModel.updateImageIdInItem(slot,
-                R.drawable.logo_image
-            )
-        }
-    }
+//    private fun setImage(value: Int, slot: SlotItem) {
+//        when (value) {
+//            Utils.SecondGameUtils.jImage -> viewModel.updateImageIdInItem(slot,
+//                R.drawable.j_image_game2
+//            )
+//            Utils.SecondGameUtils.tenImage -> viewModel.updateImageIdInItem(slot,
+//                R.drawable.ten_image
+//            )
+//            Utils.SecondGameUtils.qImage -> viewModel.updateImageIdInItem(slot, R.drawable.q_image)
+//            Utils.SecondGameUtils.kImage -> viewModel.updateImageIdInItem(slot,
+//                R.drawable.k_image_game2
+//            )
+//            Utils.SecondGameUtils.horseImage -> viewModel.updateImageIdInItem(slot,
+//                R.drawable.horse_image
+//            )
+//            Utils.SecondGameUtils.dragonImage -> viewModel.updateImageIdInItem(slot,
+//                R.drawable.dragon_image
+//            )
+//            Utils.SecondGameUtils.flowerImage -> viewModel.updateImageIdInItem(slot,
+//                R.drawable.flower_image
+//            )
+//            Utils.SecondGameUtils.logoImage -> viewModel.updateImageIdInItem(slot,
+//                R.drawable.logo_image
+//            )
+//        }
+//    }
 
     fun eventEnd() {
         if (countDown < 4) {

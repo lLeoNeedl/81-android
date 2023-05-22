@@ -93,19 +93,16 @@ class FirstGameActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.slotList.observe(this) {
             slots = it
-            val firstSlotImageIndex = it[FIRST_SLOT_INDEX].currentImageIndex
-            val secondSlotImageIndex = it[SECOND_SLOT_INDEX].currentImageIndex
-            val thirdSlotImageIndex = it[THIRD_SLOT_INDEX].currentImageIndex
             binding.run {
-                sl1CurrentImage.setImageResource(listOfImages[firstSlotImageIndex])
-                sl1PrevImage.setImageResource(listOfImages[decreaseIndex(firstSlotImageIndex)])
-                sl1NextImage.setImageResource(listOfImages[increaseIndex(firstSlotImageIndex)])
-                sl2PrevImage.setImageResource(listOfImages[increaseIndex(secondSlotImageIndex)])
-                sl2CurrentImage.setImageResource(listOfImages[secondSlotImageIndex])
-                sl2NextImage.setImageResource(listOfImages[decreaseIndex(secondSlotImageIndex)])
-                sl3PrevImage.setImageResource(listOfImages[decreaseIndex(thirdSlotImageIndex)])
-                sl3CurrentImage.setImageResource(listOfImages[thirdSlotImageIndex])
-                sl3NextImage.setImageResource(listOfImages[increaseIndex(thirdSlotImageIndex)])
+                sl1PrevImage.setImageResource(listOfImages[it[0].prevImageIndex])
+                sl1CurrentImage.setImageResource(listOfImages[it[0].currentImageIndex])
+                sl1NextImage.setImageResource(listOfImages[it[0].nextImageIndex])
+                sl2PrevImage.setImageResource(listOfImages[it[1].prevImageIndex])
+                sl2CurrentImage.setImageResource(listOfImages[it[1].currentImageIndex])
+                sl2NextImage.setImageResource(listOfImages[it[1].nextImageIndex])
+                sl3PrevImage.setImageResource(listOfImages[it[2].prevImageIndex])
+                sl3CurrentImage.setImageResource(listOfImages[it[2].currentImageIndex])
+                sl3NextImage.setImageResource(listOfImages[it[2].nextImageIndex])
             }
         }
 
@@ -117,18 +114,6 @@ class FirstGameActivity : AppCompatActivity() {
         viewModel.score.observe(this) {
             binding.tvScore.text = it.toString()
         }
-    }
-
-    private fun decreaseIndex(index: Int) = if (index == 0) {
-        listOfImages.size - 1
-    } else {
-        index - 1
-    }
-
-    private fun increaseIndex(index: Int) = if (index == listOfImages.size - 1) {
-        0
-    } else {
-        index + 1
     }
 
     fun setRandomValue(view: LinearLayout, slot: SlotItem, image: Int, numRoll: Int) {
@@ -182,7 +167,7 @@ class FirstGameActivity : AppCompatActivity() {
     }
 
     private fun setImage(index: Int, slot: SlotItem) {
-        viewModel.updateImageIdInItem(slot, index)
+        viewModel.updateImageIdInItem(slot, index, listOfImages.size)
     }
 
     fun eventEnd() {

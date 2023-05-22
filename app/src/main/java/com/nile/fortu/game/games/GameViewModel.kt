@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import java.util.UUID
+import kotlin.math.max
+import kotlin.random.Random
 
 class GameViewModel : ViewModel() {
 
@@ -35,6 +37,8 @@ class GameViewModel : ViewModel() {
             listOfItems.forEachIndexed { currentIndex, item ->
                 if (currentIndex == index) {
                     slotItem.currentImageIndex = item.currentImageIndex
+                    slotItem.prevImageIndex = item.prevImageIndex
+                    slotItem.nextImageIndex = item.nextImageIndex
                     listOfItems[currentIndex] = slotItem
                 }
             }
@@ -42,11 +46,13 @@ class GameViewModel : ViewModel() {
         _slotList.value = listOfItems
     }
 
-    fun updateImageIdInItem(item: SlotItem, imageIndex: Int) {
+    fun updateImageIdInItem(item: SlotItem, imageIndex: Int, maxValue: Int) {
         val listOfItems = _slotList.value?.toList() ?: listOf()
         listOfItems.forEach {
             if (item.id == it.id) {
                 it.currentImageIndex = imageIndex
+                it.prevImageIndex = Random.nextInt(0, (maxValue / 2) - 1)
+                it.nextImageIndex = Random.nextInt((maxValue / 2) + 1, maxValue)
             }
         }
         _slotList.value = listOfItems
