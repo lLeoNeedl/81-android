@@ -51,8 +51,8 @@ class GameViewModel : ViewModel() {
         listOfItems.forEach {
             if (item.id == it.id) {
                 it.currentImageIndex = imageIndex
-                it.prevImageIndex = Random.nextInt(0, (maxValue / 2) - 1)
-                it.nextImageIndex = Random.nextInt((maxValue / 2) + 1, maxValue)
+                it.prevImageIndex = Random.nextInt(0, maxValue)
+                it.nextImageIndex = Random.nextInt(0, maxValue)
             }
         }
         _slotList.value = listOfItems

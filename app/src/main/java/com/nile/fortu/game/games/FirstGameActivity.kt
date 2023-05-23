@@ -97,12 +97,12 @@ class FirstGameActivity : AppCompatActivity() {
                 sl1PrevImage.setImageResource(listOfImages[it[0].prevImageIndex])
                 sl1CurrentImage.setImageResource(listOfImages[it[0].currentImageIndex])
                 sl1NextImage.setImageResource(listOfImages[it[0].nextImageIndex])
-                sl2PrevImage.setImageResource(listOfImages[it[1].prevImageIndex])
+                sl2PrevImage.setImageResource(listOfImages[increaseIndex(it[2].prevImageIndex)])
                 sl2CurrentImage.setImageResource(listOfImages[it[1].currentImageIndex])
                 sl2NextImage.setImageResource(listOfImages[it[1].nextImageIndex])
                 sl3PrevImage.setImageResource(listOfImages[it[2].prevImageIndex])
                 sl3CurrentImage.setImageResource(listOfImages[it[2].currentImageIndex])
-                sl3NextImage.setImageResource(listOfImages[it[2].nextImageIndex])
+                sl3NextImage.setImageResource(listOfImages[increaseIndex(it[1].nextImageIndex)])
             }
         }
 
@@ -114,6 +114,12 @@ class FirstGameActivity : AppCompatActivity() {
         viewModel.score.observe(this) {
             binding.tvScore.text = it.toString()
         }
+    }
+
+    private fun increaseIndex(index: Int) = if (index == listOfImages.size - 1) {
+        0
+    } else {
+        index + 1
     }
 
     fun setRandomValue(view: LinearLayout, slot: SlotItem, image: Int, numRoll: Int) {
@@ -198,10 +204,6 @@ class FirstGameActivity : AppCompatActivity() {
     }
 
     companion object {
-
-        private const val FIRST_SLOT_INDEX = 0
-        private const val SECOND_SLOT_INDEX = 1
-        private const val THIRD_SLOT_INDEX = 2
 
         private const val ANIMATION_DURATION = 250L
         fun newIntent(context: Context) = Intent(context, FirstGameActivity::class.java)
