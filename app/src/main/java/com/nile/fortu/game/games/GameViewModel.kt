@@ -5,6 +5,7 @@ import android.widget.LinearLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.nile.fortu.game.databinding.ItemFirstGameSlotBinding
 import java.util.UUID
 import kotlin.random.Random
 
@@ -22,11 +23,11 @@ class GameViewModel : ViewModel() {
     val score: LiveData<Int>
         get() = _score
 
-    fun createItemFromView(index: Int, view: LinearLayout) {
+    fun createItemFromView(index: Int, view: ItemFirstGameSlotBinding) {
         val slotItem = SlotItem(
             id = UUID.randomUUID().toString(),
-            currentImage = view.getChildAt(CURRENT_IMAGE_INDEX) as ImageView,
-            nextImage = view.getChildAt(NEXT_IMAGE_INDEX) as ImageView
+            currentImage = view.currentImage,
+            nextImage = view.nextImage
         )
         val listOfItems = slotList.value?.toMutableList() ?: mutableListOf()
 
@@ -51,19 +52,7 @@ class GameViewModel : ViewModel() {
             if (item.id == it.id) {
                 it.currentImageIndex = imageIndex
                 it.prevImageIndex = Random.nextInt(0, listOfImagesSize)
-                if (listOfItems[0].prevImageIndex == listOfItems[1].prevImageIndex) {
-                    listOfItems[1].prevImageIndex = increaseIndex(
-                        listOfItems[1].prevImageIndex,
-                        listOfImagesSize
-                    )
-                }
                 it.nextImageIndex = Random.nextInt(0, listOfImagesSize)
-                if (listOfItems[0].nextImageIndex == listOfItems[2].nextImageIndex) {
-                    listOfItems[2].nextImageIndex = increaseIndex(
-                        listOfItems[2].nextImageIndex,
-                        listOfImagesSize
-                    )
-                }
             }
         }
         _slotList.value = listOfItems

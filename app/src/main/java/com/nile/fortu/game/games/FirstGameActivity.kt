@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.nile.fortu.game.R
 import com.nile.fortu.game.databinding.ActivityFirstGameBinding
+import com.nile.fortu.game.databinding.ItemFirstGameSlotBinding
 import kotlin.random.Random
 
 class FirstGameActivity : AppCompatActivity() {
@@ -41,9 +42,9 @@ class FirstGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val listOfViews = listOf(binding.flSlot1, binding.flSlot2, binding.flSlot3)
-        listOfViews.forEachIndexed { index, frameLayout ->
-            viewModel.createItemFromView(index, frameLayout)
+        val listOfViews = listOf(binding.llSlot1, binding.llSlot2, binding.llSlot3)
+        listOfViews.forEachIndexed { index, linearLayout ->
+            viewModel.createItemFromView(index, linearLayout)
         }
 
         observeViewModel()
@@ -94,15 +95,9 @@ class FirstGameActivity : AppCompatActivity() {
         viewModel.slotList.observe(this) {
             slots = it
             binding.run {
-                sl1PrevImage.setImageResource(listOfImages[it[0].prevImageIndex])
-                sl1CurrentImage.setImageResource(listOfImages[it[0].currentImageIndex])
-                sl1NextImage.setImageResource(listOfImages[it[0].nextImageIndex])
-                sl2PrevImage.setImageResource(listOfImages[it[1].prevImageIndex])
-                sl2CurrentImage.setImageResource(listOfImages[it[1].currentImageIndex])
-                sl2NextImage.setImageResource(listOfImages[it[1].nextImageIndex])
-                sl3PrevImage.setImageResource(listOfImages[it[2].prevImageIndex])
-                sl3CurrentImage.setImageResource(listOfImages[it[2].currentImageIndex])
-                sl3NextImage.setImageResource(listOfImages[it[2].nextImageIndex])
+                setImagesOnSlots(binding.llSlot1, it[0])
+                setImagesOnSlots(binding.llSlot2, it[1])
+                setImagesOnSlots(binding.llSlot3, it[2])
             }
         }
 
@@ -116,17 +111,19 @@ class FirstGameActivity : AppCompatActivity() {
         }
     }
 
-    private fun increaseIndex(index: Int) = if (index == listOfImages.size - 1) {
-        0
-    } else {
-        index + 1
+    private fun setImagesOnSlots (slotView: ItemFirstGameSlotBinding, slotItem: SlotItem) {
+        slotView.run {
+            prevImage.setImageResource(listOfImages[slotItem.prevImageIndex])
+            currentImage.setImageResource(listOfImages[slotItem.currentImageIndex])
+            nextImage.setImageResource(listOfImages[slotItem.nextImageIndex])
+        }
     }
 
-    fun setRandomValue(view: LinearLayout, slot: SlotItem, image: Int, numRoll: Int) {
+    fun setRandomValue(view: ItemFirstGameSlotBinding, slot: SlotItem, image: Int, numRoll: Int) {
         lockOrientationChange()
-        view.translationY = view.height.toFloat()
+        view.root.translationY = view.root.height.toFloat()
 
-        view.animate()
+        view.root.animate()
             .translationY(0f).setDuration(ANIMATION_DURATION)
             .setListener(object : Animator.AnimatorListener {
 
@@ -134,7 +131,6 @@ class FirstGameActivity : AppCompatActivity() {
 
                 override fun onAnimationEnd(animation: Animator) {
                     setImage(slot.oldValue % 6, slot)
-                    view.getChildAt(0).translationY = 0f
                     if (slot.oldValue != numRoll) {
                         setRandomValue(view, slot, image, numRoll)
                         slot.oldValue++
