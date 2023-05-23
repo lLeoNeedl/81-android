@@ -23,11 +23,9 @@ class GameViewModel : ViewModel() {
     val score: LiveData<Int>
         get() = _score
 
-    fun createItemFromView(index: Int, view: ItemFirstGameSlotBinding) {
+    fun createItemFromView(index: Int) {
         val slotItem = SlotItem(
-            id = UUID.randomUUID().toString(),
-            currentImage = view.currentImage,
-            nextImage = view.nextImage
+            id = UUID.randomUUID().toString()
         )
         val listOfItems = slotList.value?.toMutableList() ?: mutableListOf()
 

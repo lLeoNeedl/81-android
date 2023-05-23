@@ -43,8 +43,8 @@ class FirstGameActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val listOfViews = listOf(binding.llSlot1, binding.llSlot2, binding.llSlot3)
-        listOfViews.forEachIndexed { index, linearLayout ->
-            viewModel.createItemFromView(index, linearLayout)
+        listOfViews.forEachIndexed { index, _ ->
+            viewModel.createItemFromView(index)
         }
 
         observeViewModel()
@@ -95,9 +95,9 @@ class FirstGameActivity : AppCompatActivity() {
         viewModel.slotList.observe(this) {
             slots = it
             binding.run {
-                setImagesOnSlots(binding.llSlot1, it[0])
-                setImagesOnSlots(binding.llSlot2, it[1])
-                setImagesOnSlots(binding.llSlot3, it[2])
+                setImagesOnSlots(binding.llSlot1, it[FIRST_SLOT_INDEX])
+                setImagesOnSlots(binding.llSlot2, it[SECOND_SLOT_INDEX])
+                setImagesOnSlots(binding.llSlot3, it[THIRD_SLOT_INDEX])
             }
         }
 
@@ -200,6 +200,9 @@ class FirstGameActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val FIRST_SLOT_INDEX = 0
+        private const val SECOND_SLOT_INDEX = 1
+        private const val THIRD_SLOT_INDEX = 2
 
         private const val ANIMATION_DURATION = 250L
         fun newIntent(context: Context) = Intent(context, FirstGameActivity::class.java)

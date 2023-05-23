@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.nile.fortu.game.R
 import com.nile.fortu.game.databinding.ActivitySecondGameBinding
+import com.nile.fortu.game.databinding.ItemFirstGameSlotBinding
+import com.nile.fortu.game.databinding.ItemSecondGameSlotBinding
 import kotlin.random.Random
 
 class SecondGameActivity : AppCompatActivity() {
@@ -28,20 +30,31 @@ class SecondGameActivity : AppCompatActivity() {
         ActivitySecondGameBinding.inflate(layoutInflater)
     }
 
+    private val listOfImages = listOf(
+        R.drawable.j_image_game2,
+        R.drawable.ten_image,
+        R.drawable.q_image,
+        R.drawable.k_image_game2,
+        R.drawable.horse_image,
+        R.drawable.dragon_image,
+        R.drawable.flower_image,
+        R.drawable.logo_image,
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-//        val listOfViews = listOf(
-//            binding.flSlot1,
-//            binding.flSlot2,
-//            binding.flSlot3,
-//            binding.flSlot4,
-//            binding.flSlot5
-//        )
-//        listOfViews.forEachIndexed { index, frameLayout ->
-//            viewModel.createItemFromView(index, frameLayout)
-//        }
+        val listOfViews = listOf(
+            binding.llSlot1,
+            binding.llSlot2,
+            binding.llSlot3,
+            binding.llSlot4,
+            binding.llSlot5
+        )
+        listOfViews.forEachIndexed { index, _ ->
+            viewModel.createItemFromView(index)
+        }
 
         observeViewModel()
 
@@ -49,9 +62,10 @@ class SecondGameActivity : AppCompatActivity() {
 
         binding.flSpin.setOnClickListener {
             if (currentBet <= Utils.balance && currentBet >= GameViewModel.MIN_BET) {
-                slots.forEach {
+                listOfViews.forEachIndexed { index, linearLayout ->
                     setRandomValue(
-                        it,
+                        linearLayout,
+                        slots[index],
                         Random.nextInt(8),
                         Random.nextInt(15 - 5 + 1) + 5
                     )
@@ -90,16 +104,11 @@ class SecondGameActivity : AppCompatActivity() {
         viewModel.slotList.observe(this) {
             slots = it
             binding.run {
-                sl1CurrentImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
-                sl1NextImage.setImageResource(it[FIRST_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
-                sl2CurrentImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
-                sl2NextImage.setImageResource(it[SECOND_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
-                sl3CurrentImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
-                sl3NextImage.setImageResource(it[THIRD_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
-                sl4CurrentImage.setImageResource(it[FOURTH_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
-                sl4NextImage.setImageResource(it[FOURTH_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
-                sl5CurrentImage.setImageResource(it[FIFTH_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
-                sl5NextImage.setImageResource(it[FIFTH_SLOT_INDEX].currentImageIndex ?: R.drawable.j_image_game2)
+                setImagesOnSlots(binding.llSlot1, it[FIRST_SLOT_INDEX])
+                setImagesOnSlots(binding.llSlot2, it[SECOND_SLOT_INDEX])
+                setImagesOnSlots(binding.llSlot3, it[THIRD_SLOT_INDEX])
+                setImagesOnSlots(binding.llSlot4, it[FOURTH_SLOT_INDEX])
+                setImagesOnSlots(binding.llSlot5, it[FIFTH_SLOT_INDEX])
             }
         }
 
@@ -113,31 +122,32 @@ class SecondGameActivity : AppCompatActivity() {
         }
     }
 
-    fun setRandomValue(slot: SlotItem, image: Int, numRoll: Int) {
+    private fun setImagesOnSlots (slotView: ItemSecondGameSlotBinding, slotItem: SlotItem) {
+        slotView.run {
+            prevImage.setImageResource(listOfImages[slotItem.prevImageIndex])
+            currentImage.setImageResource(listOfImages[slotItem.currentImageIndex])
+            nextImage.setImageResource(listOfImages[slotItem.nextImageIndex])
+        }
+    }
+
+    private fun setRandomValue(view: ItemSecondGameSlotBinding, slot: SlotItem, image: Int, numRoll: Int) {
         lockOrientationChange()
-        slot.currentImage.visibility = View.VISIBLE
-        slot.currentImage.animate()
-            .translationY(-(binding.flSlot1.height.toFloat()))
-            .setDuration(ANIMATION_DURATION).start()
+        view.root.translationY = view.root.height.toFloat() / 2
 
-        slot.nextImage.translationY = slot.nextImage.height.toFloat()
-
-        slot.nextImage.animate()
+        view.root.animate()
             .translationY(0f).setDuration(ANIMATION_DURATION)
             .setListener(object : Animator.AnimatorListener {
 
                 override fun onAnimationRepeat(animation: Animator) {}
 
                 override fun onAnimationEnd(animation: Animator) {
-                    slot.currentImage.visibility = View.GONE
-//                    setImage(slot.oldValue % 8, slot)
-                    slot.currentImage.translationY = 0f
+                    setImage(slot.oldValue % 8, slot)
                     if (slot.oldValue != numRoll) {
-                        setRandomValue(slot, image, numRoll)
+                        setRandomValue(view, slot, image, numRoll)
                         slot.oldValue++
                     } else {
                         slot.oldValue = 0
-//                        setImage(image, slot)
+                        setImage(image, slot)
                         eventEnd()
                         changeButtonState(true)
                     }
@@ -152,7 +162,7 @@ class SecondGameActivity : AppCompatActivity() {
             }).start()
     }
 
-    fun changeButtonState(enabled: Boolean) {
+    private fun changeButtonState(enabled: Boolean) {
         binding.flSpin.isClickable = enabled
         binding.flSpin.isFocusable = enabled
         binding.btnIncrease.isClickable = enabled
@@ -169,34 +179,11 @@ class SecondGameActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
     }
 
-//    private fun setImage(value: Int, slot: SlotItem) {
-//        when (value) {
-//            Utils.SecondGameUtils.jImage -> viewModel.updateImageIdInItem(slot,
-//                R.drawable.j_image_game2
-//            )
-//            Utils.SecondGameUtils.tenImage -> viewModel.updateImageIdInItem(slot,
-//                R.drawable.ten_image
-//            )
-//            Utils.SecondGameUtils.qImage -> viewModel.updateImageIdInItem(slot, R.drawable.q_image)
-//            Utils.SecondGameUtils.kImage -> viewModel.updateImageIdInItem(slot,
-//                R.drawable.k_image_game2
-//            )
-//            Utils.SecondGameUtils.horseImage -> viewModel.updateImageIdInItem(slot,
-//                R.drawable.horse_image
-//            )
-//            Utils.SecondGameUtils.dragonImage -> viewModel.updateImageIdInItem(slot,
-//                R.drawable.dragon_image
-//            )
-//            Utils.SecondGameUtils.flowerImage -> viewModel.updateImageIdInItem(slot,
-//                R.drawable.flower_image
-//            )
-//            Utils.SecondGameUtils.logoImage -> viewModel.updateImageIdInItem(slot,
-//                R.drawable.logo_image
-//            )
-//        }
-//    }
+    private fun setImage(index: Int, slot: SlotItem) {
+        viewModel.updateImageIdInItem(slot, index, listOfImages.size)
+    }
 
-    fun eventEnd() {
+    private fun eventEnd() {
         if (countDown < 4) {
             countDown++
         } else {
