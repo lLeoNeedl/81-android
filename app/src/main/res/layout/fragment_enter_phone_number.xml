@@ -34,6 +34,8 @@
             android:layout_gravity="center"
             app:ccpDialog_keyboardAutoPopup="false"
             app:ccp_arrowSize="16sp"
+            app:ccpDialog_backgroundColor="@color/white"
+            app:ccpDialog_cornerRadius="12dp"
             app:ccp_autoFormatNumber="true"
             app:ccp_contentColor="@color/white"
             app:ccp_defaultPhoneCode="380"
