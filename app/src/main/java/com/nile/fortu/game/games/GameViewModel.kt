@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import java.util.UUID
-import kotlin.math.max
 import kotlin.random.Random
 
 class GameViewModel : ViewModel() {
@@ -46,16 +45,34 @@ class GameViewModel : ViewModel() {
         _slotList.value = listOfItems
     }
 
-    fun updateImageIdInItem(item: SlotItem, imageIndex: Int, maxValue: Int) {
+    fun updateImageIdInItem(item: SlotItem, imageIndex: Int, listOfImagesSize: Int) {
         val listOfItems = _slotList.value?.toList() ?: listOf()
         listOfItems.forEach {
             if (item.id == it.id) {
                 it.currentImageIndex = imageIndex
-                it.prevImageIndex = Random.nextInt(0, (maxValue / 2) - 1)
-                it.nextImageIndex = Random.nextInt((maxValue / 2) + 1, maxValue)
+                it.prevImageIndex = Random.nextInt(0, listOfImagesSize)
+                if (listOfItems[0].prevImageIndex == listOfItems[1].prevImageIndex) {
+                    listOfItems[1].prevImageIndex = increaseIndex(
+                        listOfItems[1].prevImageIndex,
+                        listOfImagesSize
+                    )
+                }
+                it.nextImageIndex = Random.nextInt(0, listOfImagesSize)
+                if (listOfItems[0].nextImageIndex == listOfItems[2].nextImageIndex) {
+                    listOfItems[2].nextImageIndex = increaseIndex(
+                        listOfItems[2].nextImageIndex,
+                        listOfImagesSize
+                    )
+                }
             }
         }
         _slotList.value = listOfItems
+    }
+
+    private fun increaseIndex(index: Int, listOfImagesSize: Int) = if (index == listOfImagesSize - 1) {
+        0
+    } else {
+        index + 1
     }
 
     fun increaseBet() {

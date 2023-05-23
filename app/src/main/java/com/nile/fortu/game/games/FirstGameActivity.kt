@@ -116,6 +116,12 @@ class FirstGameActivity : AppCompatActivity() {
         }
     }
 
+    private fun increaseIndex(index: Int) = if (index == listOfImages.size - 1) {
+        0
+    } else {
+        index + 1
+    }
+
     fun setRandomValue(view: LinearLayout, slot: SlotItem, image: Int, numRoll: Int) {
         lockOrientationChange()
         view.translationY = view.height.toFloat()
@@ -198,10 +204,6 @@ class FirstGameActivity : AppCompatActivity() {
     }
 
     companion object {
-
-        private const val FIRST_SLOT_INDEX = 0
-        private const val SECOND_SLOT_INDEX = 1
-        private const val THIRD_SLOT_INDEX = 2
 
         private const val ANIMATION_DURATION = 250L
         fun newIntent(context: Context) = Intent(context, FirstGameActivity::class.java)
